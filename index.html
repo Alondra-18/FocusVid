@@ -23,6 +23,7 @@
         </button>
         <div class="nav-menu" id="navMenu">
             <a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-home"></i> Inicio</a>
+            <a href="#" class="nav-link" data-section="usuarios"><i class="fas fa-users"></i> Usuarios</a>
             <a href="#" class="nav-link" data-section="zonas"><i class="fas fa-map-marked-alt"></i> Zonas</a>
             <a href="#" class="nav-link" data-section="enfermedades"><i class="fas fa-virus"></i> Enfermedades</a>
             <a href="#" class="nav-link" data-section="detecciones"><i class="fas fa-camera"></i> Detecciones</a>
@@ -75,6 +76,15 @@
         </div>
     </section>
 
+    <!-- ============ USUARIOS ============ -->
+    <section id="usuarios" class="section">
+        <div class="section-header">
+            <h1>Gestión de Usuarios</h1>
+            <button class="btn btn-primary" id="btnAddUser"><i class="fas fa-plus"></i> Agregar Usuario</button>
+        </div>
+        <div class="users-grid" id="usersGrid"></div>
+    </section>
+
     <!-- ============ ZONAS ============ -->
     <section id="zonas" class="section">
         <div class="section-header"><h1>Zonas Vitivinícolas de Chihuahua</h1></div>
@@ -95,21 +105,18 @@
         </div>
 
         <div class="card" id="uploadCard">
-            <div class="card-header"><h2><i class="fas fa-upload"></i> Subir Fotografía para Análisis</h2></div>
+            <div class="card-header"><h2><i class="fas fa-upload"></i> Subir Fotografías para Análisis (máx. 5)</h2></div>
             <div class="card-body">
                 <form id="detectionForm">
                     <div class="form-grid">
                         <div class="form-group full-width">
-                            <label>Fotografía de la Planta</label>
+                            <label>Fotografías de la Planta (máximo 5)</label>
                             <div class="upload-area" id="uploadArea">
                                 <i class="fas fa-cloud-upload-alt"></i>
-                                <p>Arrastra una imagen o haz clic para seleccionar</p>
-                                <input type="file" id="photoUpload" accept="image/*" hidden>
+                                <p>Arrastra imágenes o haz clic para seleccionar (máx. 5 fotos)</p>
+                                <input type="file" id="photoUpload" accept="image/*" multiple hidden>
                             </div>
-                            <div id="photoPreview" class="photo-preview" style="display:none;">
-                                <img id="previewImage" src="" alt="Preview">
-                                <button type="button" class="btn-remove" id="removePhoto"><i class="fas fa-times"></i></button>
-                            </div>
+                            <div id="photoPreviewGrid" class="photo-preview-grid" style="display:none;"></div>
                         </div>
                         <div class="form-group">
                             <label for="selectZona">Zona / Región</label>
@@ -182,7 +189,42 @@
 
 </main>
 
-<!-- Edit Modal -->
+<!-- User Modal -->
+<div class="modal" id="userModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="userModalTitle">Agregar Usuario</h2>
+            <button class="modal-close" id="closeUserModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="userForm">
+                <input type="hidden" id="editUserId">
+                <div class="form-group">
+                    <label for="userName">Nombre completo</label>
+                    <input type="text" id="userName" class="form-control" placeholder="Ej: Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label for="userRole">Rol / Cargo</label>
+                    <select id="userRole" class="form-control" required>
+                        <option value="">Seleccionar rol...</option>
+                        <option value="Enólogo">Enólogo</option>
+                        <option value="Ingeniero Agrónomo">Ingeniero Agrónomo</option>
+                        <option value="Técnico Vitivinícola">Técnico Vitivinícola</option>
+                        <option value="Fitopatólogo">Fitopatólogo</option>
+                        <option value="Administrador de Viñedo">Administrador de Viñedo</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelUserEdit">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Detection Modal -->
 <div class="modal" id="editModal">
     <div class="modal-content">
         <div class="modal-header">

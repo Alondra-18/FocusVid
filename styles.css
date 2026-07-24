@@ -115,8 +115,8 @@ a{text-decoration:none;color:inherit}
 .btn-secondary:hover{background:#e0e0e0}
 .btn-success{background:var(--success);color:#fff}
 .btn-success:hover{background:#219a52}
-.btn-danger{background:var(--primary);color:#fff}
-.btn-danger:hover{background:var(--primary-dark)}
+.btn-danger{background:#c0392b;color:#fff}
+.btn-danger:hover{background:#a93226}
 .btn-sm{padding:4px 8px;font-size:9px}
 
 /* UPLOAD */
@@ -124,13 +124,39 @@ a{text-decoration:none;color:inherit}
 .upload-area:hover,.upload-area.dragover{border-color:var(--primary);background:var(--primary-light)}
 .upload-area i{font-size:28px;color:var(--primary);margin-bottom:6px;display:block}
 .upload-area p{color:var(--text-light);font-size:11px}
-.photo-preview{position:relative;display:inline-block;margin-top:8px}
-.photo-preview img{max-width:100%;max-height:200px;border-radius:6px;border:2px solid var(--border)}
-.btn-remove{position:absolute;top:-6px;right:-6px;background:var(--primary);color:#fff;border:none;border-radius:50%;width:22px;height:22px;cursor:pointer;font-size:11px;display:flex;align-items:center;justify-content:center}
+.photo-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin-top:10px}
+.photo-preview-item{position:relative;border-radius:6px;overflow:hidden;border:2px solid var(--border)}
+.photo-preview-item img{width:100%;height:100px;object-fit:cover;display:block}
+.photo-preview-item .btn-remove-photo{position:absolute;top:4px;right:4px;background:var(--primary);color:#fff;border:none;border-radius:50%;width:20px;height:20px;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center}
+
+/* PRODUCT IMAGE */
+.product-img-container{width:100%;height:100px;border-radius:6px;overflow:hidden;margin-bottom:6px;display:flex;align-items:center;justify-content:center;position:relative}
+.product-img-container img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.product-img-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:6px;color:#fff;font-weight:700;font-size:11px;gap:4px}
+.product-img-placeholder i{font-size:22px}
+.product-img-placeholder.fungicida{background:linear-gradient(135deg,#2c3e50,#3498db)}
+.product-img-placeholder.herbicida{background:linear-gradient(135deg,#27ae60,#2ecc71)}
+.product-img-placeholder.fertilizante{background:linear-gradient(135deg,#f39c12,#e67e22)}
+.product-img-placeholder.acaricida{background:linear-gradient(135deg,#8e44ad,#9b59b6)}
+.product-img-placeholder.insecticida{background:linear-gradient(135deg,#c0392b,#e74c3c)}
+.product-img-placeholder.biocontrol{background:linear-gradient(135deg,#16a085,#1abc9c)}
+.product-img-placeholder.protector{background:linear-gradient(135deg,#2c3e50,#7f8c8d)}
+.product-img-placeholder.trampa{background:linear-gradient(135deg,#d35400,#e67e22)}
+
+/* USERS GRID */
+.users-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.user-card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;text-align:center;transition:transform .2s}
+.user-card:hover{transform:translateY(-2px)}
+.user-card-avatar{width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;margin:0 auto 10px}
+.user-card h3{font-size:13px;margin-bottom:2px}
+.user-card p{font-size:10px;color:var(--text-light);margin-bottom:10px}
+.user-card-actions{display:flex;gap:6px;justify-content:center}
 
 /* ANALYSIS RESULT */
 .analysis-result{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .analysis-left{display:flex;flex-direction:column;gap:10px}
+.analysis-left .analysis-photos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:6px}
+.analysis-left .analysis-photos-grid img{width:100%;height:80px;object-fit:cover;border-radius:6px;border:2px solid var(--border)}
 .analysis-left img{width:100%;max-height:250px;object-fit:cover;border-radius:6px}
 .analysis-right{display:flex;flex-direction:column;gap:8px}
 .analysis-item{background:var(--hover);padding:10px;border-radius:6px;border-left:3px solid var(--primary)}
@@ -143,6 +169,8 @@ a{text-decoration:none;color:inherit}
 /* DETECTIONS GRID */
 .detections-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
 .detection-card{background:var(--hover);border-radius:var(--radius);overflow:hidden;position:relative}
+.detection-card .detection-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(80px,1fr));gap:2px}
+.detection-card .detection-photos img{width:100%;height:80px;object-fit:cover}
 .detection-card img{width:100%;height:140px;object-fit:cover}
 .detection-card-body{padding:10px}
 .detection-card-body h3{font-size:12px;margin-bottom:4px}
@@ -222,9 +250,12 @@ a{text-decoration:none;color:inherit}
     .section-header{flex-direction:column;align-items:flex-start}
     .form-actions{flex-direction:column}
     .form-actions .btn{width:100%;justify-content:center}
+    .users-grid{grid-template-columns:1fr}
+    .photo-preview-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:480px){
     .stats-grid{grid-template-columns:1fr}
     .main-content{padding:10px}
     .section-header h1{font-size:14px}
+    .photo-preview-grid{grid-template-columns:repeat(2,1fr)}
 }

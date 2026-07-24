@@ -1,4 +1,4 @@
-const USERS = [
+let users = [
     { id: 0, name: "Juan Pérez", role: "Enólogo" },
     { id: 1, name: "María García", role: "Ingeniera Agrónoma" },
     { id: 2, name: "Carlos López", role: "Técnico Vitivinícola" },
@@ -9,52 +9,80 @@ const USERS = [
 const ZONAS = [
     {
         id: "parral", nombre: "Valle de Santiago - El Parral", municipio: "Hidalgo del Parral",
-        coord: { x: 32, y: 45 }, altitud: "1650 msnm",
+        altitud: "1650 msnm",
         clima: { temp: "18°C", humedad: "45%", viento: "12 km/h", uv: "8" },
         suelos: ["arcilloso", "franco"],
         descripcion: "Zona histórica vitivinícola con tradición desde el siglo XVII. Clima semiárido con lluvias estacionales."
     },
     {
         id: "santacruz", nombre: "Santa Cruz de Rosales", municipio: "Santa Cruz de Rosales",
-        coord: { x: 22, y: 22 }, altitud: "1400 msnm",
+        altitud: "1400 msnm",
         clima: { temp: "20°C", humedad: "38%", viento: "15 km/h", uv: "9" },
         suelos: ["arenoso", "calizo"],
         descripcion: "Región con suelos calcáreos ideales para uvas de mesa y vinificación. Clima continental seco."
     },
     {
         id: "aldama", nombre: "Aldama", municipio: "Aldama",
-        coord: { x: 30, y: 20 }, altitud: "1200 msnm",
+        altitud: "1200 msnm",
         clima: { temp: "22°C", humedad: "35%", viento: "18 km/h", uv: "10" },
         suelos: ["arenoso", "negro"],
         descripcion: "Zona emergente de viticultura moderna con tecnología de riego por goteo. Suelos arenosos bien drenados."
     },
     {
         id: "saucillo", nombre: "Saucillo", municipio: "Saucillo",
-        coord: { x: 28, y: 38 }, altitud: "1100 msnm",
+        altitud: "1100 msnm",
         clima: { temp: "24°C", humedad: "30%", viento: "20 km/h", uv: "11" },
         suelos: ["arcilloso", "arenoso"],
         descripcion: "Región cálida con alta insolación. Producción de uvas para elaboración de vinos tintos robustos."
     },
     {
         id: "valle_allende", nombre: "Valle de Allende", municipio: "Allende",
-        coord: { x: 30, y: 30 }, altitud: "1550 msnm",
+        altitud: "1550 msnm",
         clima: { temp: "19°C", humedad: "42%", viento: "14 km/h", uv: "8" },
         suelos: ["franco", "calizo"],
         descripcion: "Zona con microclima favorable para cabernet sauvignon y tempranillo. Suelos francos con buen drenaje."
     },
     {
         id: "jimenez", nombre: "Jiménez", municipio: "Jiménez",
-        coord: { x: 35, y: 22 }, altitud: "1300 msnm",
+        altitud: "1300 msnm",
         clima: { temp: "21°C", humedad: "40%", viento: "16 km/h", uv: "9" },
         suelos: ["negro", "arcilloso"],
         descripcion: "Región con suelos ricos en materia orgánica. Ideal para variedades de uva white y garnacha."
     },
     {
         id: "camargo", nombre: "Camargo", municipio: "Camargo",
-        coord: { x: 40, y: 15 }, altitud: "1050 msnm",
+        altitud: "1050 msnm",
         clima: { temp: "25°C", humedad: "28%", viento: "22 km/h", uv: "11" },
         suelos: ["calizo", "arenoso"],
         descripcion: "Zona árida con alto estrés hídrico que favorece la concentración de azúcares en la uva."
+    },
+    {
+        id: "santa_isabel", nombre: "Santa Isabel", municipio: "Santa Isabel",
+        altitud: "1180 msnm",
+        clima: { temp: "23°C", humedad: "32%", viento: "17 km/h", uv: "10" },
+        suelos: ["arenoso", "franco"],
+        descripcion: "Zona en el Valle de San Buenaventura con producción diversificada de uva de mesa y vinífera. Suelos francos-arenosos con buen drenaje natural."
+    },
+    {
+        id: "cuauhtemoc", nombre: "Cuauhtémoc", municipio: "Cuauhtémoc",
+        altitud: "2060 msnm",
+        clima: { temp: "14°C", humedad: "50%", viento: "20 km/h", uv: "9" },
+        suelos: ["franco", "negro"],
+        descripcion: "Zona alta del estado con clima frío y mayor humedad. Suelos ricos en materia orgánica aptos para variedades de clima templado."
+    },
+    {
+        id: "delicias", nombre: "Delicias", municipio: "Delicias",
+        altitud: "1140 msnm",
+        clima: { temp: "24°C", humedad: "30%", viento: "19 km/h", uv: "11" },
+        suelos: ["arenoso", "arcilloso"],
+        descripcion: "Zona agrícola intensiva del sur de Chihuahua. Alto potencial vitivinícola con riego tecnizado y clima cálido-seco."
+    },
+    {
+        id: "namiquipa", nombre: "Namiquipa", municipio: "Namiquipa",
+        altitud: "1880 msnm",
+        clima: { temp: "15°C", humedad: "48%", viento: "16 km/h", uv: "8" },
+        suelos: ["franco", "calizo"],
+        descripcion: "Región montañosa con microclimas variados. Tradición agrícola incipiente en viticultura con suelos calizos y franqueados."
     }
 ];
 
@@ -110,6 +138,83 @@ const SUELOS_DATA = {
         nutrientes: { n: "Muy Alto", p: "Alto", k: "Alto", ca: "Medio", mg: "Medio", fe: "Alto", mn: "Alto", zn: "Medio" }
     }
 };
+
+const PRODUCTO_IMG = {
+    "Azufre mojable": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
+    "Azufre micronizado": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
+    "Myclobutanil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Bicarbonato de potasio": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Cobre hidróxido": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&h=200&fit=crop",
+    "Cobre oxicloruro": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&h=200&fit=crop",
+    "Fosfito de potasio": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Mancozeb": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Fludioxonil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Pirimetanil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Bacillus subtilis": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Clorotalonil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Captan": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Cobre + Azufre": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&h=200&fit=crop",
+    "Sulfato de hierro": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Quelato de hierro Fe-EDDHA": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Extracto de algas marinas": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Humato de potasio + Fe": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Nitrato de calcio": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Urea foliar": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Harina de sangre": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Baba de caracol": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Sulfato de calcio (yeso)": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
+    "Caolín": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
+    "Sombra parcial (mallas)": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
+    "Silicato de potasio": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Abamectina": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Spirodiclofen": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Aceite de neem": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Phytoseiulus persimilis": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Aceite mineral (verano)": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Piretrinas naturales": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Jabón potásico": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Imidacloprid": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Bacillus thuringiensis": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Captura con feromonas": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
+    "Clorpirifós": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Spinosad": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop"
+};
+
+function getProductoImgClass(nombre, tipo) {
+    if (tipo && tipo.toLowerCase().includes("fungicida")) return "fungicida";
+    if (tipo && tipo.toLowerCase().includes("herbicida")) return "herbicida";
+    if (tipo && tipo.toLowerCase().includes("fertilizante")) return "fertilizante";
+    if (tipo && tipo.toLowerCase().includes("acaricida")) return "acaricida";
+    if (tipo && tipo.toLowerCase().includes("insecticida")) return "insecticida";
+    if (tipo && (tipo.toLowerCase().includes("biocontrol") || tipo.toLowerCase().includes("biológico"))) return "biocontrol";
+    if (tipo && (tipo.toLowerCase().includes("protector") || tipo.toLowerCase().includes("solar"))) return "protector";
+    if (tipo && tipo.toLowerCase().includes("trampa")) return "trampa";
+    return "fungicida";
+}
+
+function getProductoIcon(nombre, tipo) {
+    const t = (tipo || "").toLowerCase();
+    if (t.includes("fungicida")) return "fa-shield-virus";
+    if (t.includes("herbicida")) return "fa-leaf";
+    if (t.includes("fertilizante")) return "fa-seedling";
+    if (t.includes("acaricida")) return "fa-bug";
+    if (t.includes("insecticida")) return "fa-bugs";
+    if (t.includes("biocontrol") || t.includes("biológico")) return "fa-dna";
+    if (t.includes("protector") || t.includes("solar")) return "fa-sun";
+    if (t.includes("trampa")) return "fa-crosshairs";
+    return "fa-flask";
+}
+
+function renderProductImg(producto, height) {
+    const h = height || 100;
+    const imgClass = getProductoImgClass(producto.nombre, producto.tipo);
+    const icon = getProductoIcon(producto.nombre, producto.tipo);
+    const imgUrl = PRODUCTO_IMG[producto.nombre];
+    if (imgUrl) {
+        return `<div class="product-img-container" style="height:${h}px"><img src="${imgUrl}" alt="${producto.nombre}" onerror="this.parentElement.innerHTML='<div class=\\'product-img-placeholder ${imgClass}\\'><i class=\\'fas ${icon}\\'></i>${producto.nombre}</div>'"></div>`;
+    }
+    return `<div class="product-img-container" style="height:${h}px"><div class="product-img-placeholder ${imgClass}"><i class="fas ${icon}"></i>${producto.nombre}</div></div>`;
+}
 
 const ENFERMEDADES = [
     {
@@ -253,32 +358,127 @@ const TIPO_COLORS = {
 
 let detections = [];
 let currentDetection = {};
+let currentPhotos = [];
 let nextId = 1;
+let nextUserId = 5;
 
 function init() {
     loadUsers();
+    loadUsersFromStorage();
     loadZonas();
     loadEnfermedadesSelect();
     setupNavigation();
     setupUpload();
     setupFilters();
     setupEditModal();
+    setupUserModal();
     loadDetections();
     updateStats();
     renderMap();
     renderRecentDetections();
     renderAllDetections();
+    renderUsers();
 }
 
 /* ===== USERS ===== */
+function loadUsersFromStorage() {
+    try {
+        const saved = localStorage.getItem("focusvid_users");
+        if (saved) {
+            users = JSON.parse(saved);
+            nextUserId = users.length ? Math.max(...users.map(u => u.id)) + 1 : 1;
+        }
+    } catch (e) {}
+}
+
+function saveUsers() {
+    try { localStorage.setItem("focusvid_users", JSON.stringify(users)); } catch (e) {}
+}
+
 function loadUsers() {
     const sel = document.getElementById("userSelect");
-    USERS.forEach(u => {
+    sel.innerHTML = "";
+    users.forEach(u => {
         const opt = document.createElement("option");
         opt.value = u.id;
         opt.textContent = `${u.name} (${u.role})`;
         sel.appendChild(opt);
     });
+}
+
+function renderUsers() {
+    const grid = document.getElementById("usersGrid");
+    if (users.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><i class="fas fa-users"></i><p>No hay usuarios registrados.</p></div>';
+        return;
+    }
+    grid.innerHTML = users.map(u => `
+        <div class="user-card" id="user-card-${u.id}">
+            <div class="user-card-avatar">${u.name.split(" ").map(n => n[0]).join("").substring(0, 2)}</div>
+            <h3>${u.name}</h3>
+            <p>${u.role}</p>
+            <div class="user-card-actions">
+                <button class="btn btn-sm btn-secondary" onclick="editUser(${u.id})"><i class="fas fa-edit"></i> Editar</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteUser(${u.id})"><i class="fas fa-trash"></i> Eliminar</button>
+            </div>
+        </div>
+    `).join("");
+}
+
+window.editUser = function(id) {
+    const u = users.find(u => u.id === id);
+    if (!u) return;
+    document.getElementById("userModalTitle").textContent = "Editar Usuario";
+    document.getElementById("editUserId").value = u.id;
+    document.getElementById("userName").value = u.name;
+    document.getElementById("userRole").value = u.role;
+    document.getElementById("userModal").classList.add("show");
+};
+
+window.deleteUser = function(id) {
+    if (users.length <= 1) { showToast("Debe haber al menos un usuario registrado"); return; }
+    if (!confirm("¿Está seguro de eliminar este usuario?")) return;
+    users = users.filter(u => u.id !== id);
+    saveUsers();
+    loadUsers();
+    renderUsers();
+    showToast("Usuario eliminado");
+};
+
+/* ===== USER MODAL ===== */
+function setupUserModal() {
+    document.getElementById("btnAddUser").addEventListener("click", () => {
+        if (users.length >= 5) { showToast("Máximo 5 usuarios permitidos"); return; }
+        document.getElementById("userModalTitle").textContent = "Agregar Usuario";
+        document.getElementById("userForm").reset();
+        document.getElementById("editUserId").value = "";
+        document.getElementById("userModal").classList.add("show");
+    });
+    document.getElementById("closeUserModal").addEventListener("click", () => document.getElementById("userModal").classList.remove("show"));
+    document.getElementById("cancelUserEdit").addEventListener("click", () => document.getElementById("userModal").classList.remove("show"));
+    document.getElementById("userModal").addEventListener("click", e => { if (e.target === e.currentTarget) e.target.classList.remove("show"); });
+    document.getElementById("userForm").addEventListener("submit", saveUser);
+}
+
+function saveUser(e) {
+    e.preventDefault();
+    const editId = document.getElementById("editUserId").value;
+    const name = document.getElementById("userName").value.trim();
+    const role = document.getElementById("userRole").value;
+    if (!name || !role) { showToast("Complete todos los campos"); return; }
+
+    if (editId) {
+        const idx = users.findIndex(u => u.id === parseInt(editId));
+        if (idx !== -1) { users[idx].name = name; users[idx].role = role; }
+    } else {
+        if (users.length >= 5) { showToast("Máximo 5 usuarios permitidos"); return; }
+        users.push({ id: nextUserId++, name, role });
+    }
+    saveUsers();
+    loadUsers();
+    renderUsers();
+    document.getElementById("userModal").classList.remove("show");
+    showToast(editId ? "Usuario actualizado" : "Usuario agregado");
 }
 
 /* ===== ZONAS DROPDOWNS ===== */
@@ -339,9 +539,7 @@ function setupNavigation() {
 function setupUpload() {
     const area = document.getElementById("uploadArea");
     const input = document.getElementById("photoUpload");
-    const preview = document.getElementById("photoPreview");
-    const previewImg = document.getElementById("previewImage");
-    const removeBtn = document.getElementById("removePhoto");
+    const previewGrid = document.getElementById("photoPreviewGrid");
 
     area.addEventListener("click", () => input.click());
     area.addEventListener("dragover", e => { e.preventDefault(); area.classList.add("dragover"); });
@@ -349,17 +547,9 @@ function setupUpload() {
     area.addEventListener("drop", e => {
         e.preventDefault();
         area.classList.remove("dragover");
-        if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        handleFiles(e.dataTransfer.files);
     });
-    input.addEventListener("change", e => { if (e.target.files.length) handleFile(e.target.files[0]); });
-    removeBtn.addEventListener("click", () => {
-        preview.style.display = "none";
-        area.style.display = "block";
-        input.value = "";
-        currentDetection = {};
-        document.getElementById("btnSaveDetection").disabled = true;
-        document.getElementById("analysisCard").style.display = "none";
-    });
+    input.addEventListener("change", e => handleFiles(e.target.files));
 
     document.getElementById("btnAnalyze").addEventListener("click", analyzePhoto);
     document.getElementById("detectionForm").addEventListener("submit", saveDetection);
@@ -367,22 +557,53 @@ function setupUpload() {
         document.getElementById("uploadCard").scrollIntoView({ behavior: "smooth" });
     });
 
-    function handleFile(file) {
-        if (!file.type.startsWith("image/")) { showToast("Seleccione un archivo de imagen válido"); return; }
-        const reader = new FileReader();
-        reader.onload = e => {
-            previewImg.src = e.target.result;
-            preview.style.display = "block";
-            area.style.display = "none";
-            currentDetection.photo = e.target.result;
-        };
-        reader.readAsDataURL(file);
+    function handleFiles(files) {
+        const remaining = 5 - currentPhotos.length;
+        if (remaining <= 0) { showToast("Máximo 5 fotografías permitidas"); return; }
+        const toAdd = Array.from(files).slice(0, remaining);
+        toAdd.forEach(file => {
+            if (!file.type.startsWith("image/")) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                currentPhotos.push(e.target.result);
+                renderPhotoPreview();
+            };
+            reader.readAsDataURL(file);
+        });
+        if (files.length > remaining) showToast(`Solo se agregaron ${remaining} de ${files.length} fotos (máx. 5)`);
     }
+
+    function renderPhotoPreview() {
+        if (currentPhotos.length === 0) {
+            previewGrid.style.display = "none";
+            area.style.display = "block";
+            currentDetection.photos = [];
+            currentDetection.photo = null;
+            document.getElementById("btnSaveDetection").disabled = true;
+            document.getElementById("analysisCard").style.display = "none";
+            return;
+        }
+        previewGrid.style.display = "grid";
+        area.style.display = currentPhotos.length >= 5 ? "none" : "block";
+        previewGrid.innerHTML = currentPhotos.map((src, i) => `
+            <div class="photo-preview-item">
+                <img src="${src}" alt="Foto ${i + 1}">
+                <button type="button" class="btn-remove-photo" onclick="removePhoto(${i})"><i class="fas fa-times"></i></button>
+            </div>
+        `).join("");
+        currentDetection.photos = [...currentPhotos];
+        currentDetection.photo = currentPhotos[0];
+    }
+
+    window.removePhoto = function(index) {
+        currentPhotos.splice(index, 1);
+        renderPhotoPreview();
+    };
 }
 
 /* ===== ANALYZE ===== */
 function analyzePhoto() {
-    if (!currentDetection.photo) { showToast("Primero suba una fotografía"); return; }
+    if (!currentDetection.photo) { showToast("Primero suba al menos una fotografía"); return; }
     const zonaId = document.getElementById("selectZona").value;
     const sueloId = document.getElementById("selectSuelo").value;
     let enfId = document.getElementById("selectEnfermedad").value;
@@ -410,11 +631,15 @@ function analyzePhoto() {
 
     const recommended = enfermedad.productos[Math.floor(Math.random() * enfermedad.productos.length)];
 
+    const photosHtml = currentDetection.photos && currentDetection.photos.length > 0
+        ? `<div class="analysis-photos-grid">${currentDetection.photos.map((p, i) => `<img src="${p}" alt="Foto ${i + 1}">`).join("")}</div>`
+        : `<img src="${currentDetection.photo}" alt="Foto analizada">`;
+
     const card = document.getElementById("analysisCard");
     card.style.display = "block";
     document.getElementById("analysisResult").innerHTML = `
         <div class="analysis-left">
-            <img src="${currentDetection.photo}" alt="Foto analizada">
+            ${photosHtml}
             <div class="analysis-item"><h4>Fecha y Hora</h4><p>${currentDetection.fecha} - ${currentDetection.hora}</p></div>
         </div>
         <div class="analysis-right">
@@ -444,6 +669,7 @@ function analyzePhoto() {
             <div class="analysis-item"><h4>Condiciones Favorables a la Enfermedad</h4><p style="font-size:12px">${enfermedad.condiciones}</p></div>
             <div class="analysis-item">
                 <h4>Producto Recomendado</h4>
+                ${renderProductImg(recommended, 100)}
                 <div class="product-card">
                     <span class="prod-type">${recommended.tipo}</span>
                     <h4>${recommended.nombre}</h4>
@@ -486,11 +712,13 @@ function saveDetection(e) {
 
 function resetForm() {
     document.getElementById("detectionForm").reset();
-    document.getElementById("photoPreview").style.display = "none";
+    document.getElementById("photoPreviewGrid").style.display = "none";
+    document.getElementById("photoPreviewGrid").innerHTML = "";
     document.getElementById("uploadArea").style.display = "block";
     document.getElementById("analysisCard").style.display = "none";
     document.getElementById("btnSaveDetection").disabled = true;
     currentDetection = {};
+    currentPhotos = [];
 }
 
 /* ===== RENDER MAP ===== */
@@ -533,11 +761,11 @@ function renderMap() {
 }
 
 function getLat(id) {
-    const c = { parral:26.93, santacruz:28.19, aldama:28.83, saucillo:28.03, valle_allende:26.93, jimenez:27.13, camargo:27.68 };
+    const c = { parral:26.93, santacruz:28.19, aldama:28.83, saucillo:28.03, valle_allende:26.93, jimenez:27.13, camargo:27.68, santa_isabel:28.38, cuauhtemoc:28.40, delicias:28.18, namiquipa:29.25 };
     return c[id] || 28.0;
 }
 function getLng(id) {
-    const c = { parral:-105.82, santacruz:-106.04, aldama:-105.91, saucillo:-105.33, valle_allende:-105.42, jimenez:-104.93, camargo:-105.17 };
+    const c = { parral:-105.82, santacruz:-106.04, aldama:-105.91, saucillo:-105.33, valle_allende:-105.42, jimenez:-104.93, camargo:-105.17, santa_isabel:-106.06, cuauhtemoc:-106.85, delicias:-105.47, namiquipa:-106.46 };
     return c[id] || -106.0;
 }
 
@@ -608,6 +836,7 @@ function renderEnfermedadCards() {
                     <strong style="font-size:12px">Productos de Tratamiento:</strong>
                     ${e.productos.map(p => `
                         <div style="font-size:11px;padding:6px;margin-top:4px;background:#f9f9f9;border-radius:6px;border-left:3px solid ${p.orgánico ? '#27ae60' : '#1a3a5c'}">
+                            ${renderProductImg(p, 70)}
                             <b>${p.nombre}</b> — ${p.tipo}<br>
                             Dosis: ${p.dosis} ${p.orgánico ? '🌱' : '⚗️'}
                         </div>
@@ -668,9 +897,10 @@ function renderRecentDetections() {
     container.innerHTML = filtered.map(d => {
         const enf = ENFERMEDADES.find(e => e.id === d.enfId);
         const zona = ZONAS.find(z => z.id === d.zonaId);
+        const img = d.photos && d.photos.length > 0 ? d.photos[0] : d.photo;
         return `
         <div class="detection-list-item">
-            <img src="${d.photo}" alt="detección">
+            <img src="${img}" alt="detección">
             <div class="info">
                 <h4>${enf ? enf.icono + ' ' + enf.nombre : 'Desconocida'}</h4>
                 <p>${zona ? zona.nombre : ''} — ${d.fecha} ${d.hora}</p>
@@ -682,10 +912,13 @@ function renderRecentDetections() {
 function renderDetectionCard(d) {
     const enf = ENFERMEDADES.find(e => e.id === d.enfId);
     const zona = ZONAS.find(z => z.id === d.zonaId);
-    const user = USERS.find(u => u.id === d.userId);
+    const user = users.find(u => u.id === d.userId);
+    const photosHtml = d.photos && d.photos.length > 1
+        ? `<div class="detection-photos">${d.photos.map((p, i) => `<img src="${p}" alt="Foto ${i + 1}">`).join("")}</div>`
+        : `<img src="${d.photo}" alt="detección">`;
     return `
     <div class="detection-card" id="detection-${d.id}">
-        <img src="${d.photo}" alt="detección">
+        ${photosHtml}
         <div class="detection-card-body">
             <h3>${enf ? enf.icono + ' ' + enf.nombre : 'Enfermedad desconocida'}</h3>
             <div class="detection-meta">
@@ -697,10 +930,13 @@ function renderDetectionCard(d) {
             </div>
             ${enf ? `<span class="enf-tag ${enf.tipo}">${enf.tipoLabel}</span>` : ''}
             ${d.productoRecomendado ? `
-            <div class="product-card" style="margin-top:8px">
-                <span class="prod-type">${d.productoRecomendado.tipo}</span>
-                <h4>${d.productoRecomendado.nombre}</h4>
-                <p style="font-size:11px">Dosis: ${d.productoRecomendado.dosis}</p>
+            <div style="margin-top:8px">
+                ${renderProductImg(d.productoRecomendado, 80)}
+                <div class="product-card">
+                    <span class="prod-type">${d.productoRecomendado.tipo}</span>
+                    <h4>${d.productoRecomendado.nombre}</h4>
+                    <p style="font-size:11px">Dosis: ${d.productoRecomendado.dosis}</p>
+                </div>
             </div>` : ''}
             <div class="detection-actions">
                 <button class="btn btn-sm btn-secondary" onclick="editDetection(${d.id})"><i class="fas fa-edit"></i> Editar</button>
@@ -808,7 +1044,7 @@ function renderHistory() {
             const enf = ENFERMEDADES.find(e => e.id === d.enfId);
             const zona = ZONAS.find(z => z.id === d.zonaId);
             const suelo = SUELOS_DATA[d.sueloId];
-            const user = USERS.find(u => u.id === d.userId);
+            const user = users.find(u => u.id === d.userId);
             const parts = d.fecha ? d.fecha.split("/") : [];
             html += `
             <div class="history-entry">
