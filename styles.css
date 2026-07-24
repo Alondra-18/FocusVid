@@ -224,6 +224,15 @@ a{text-decoration:none;color:inherit}
 ::-webkit-scrollbar-thumb:hover{background:#999}
 
 /* RESPONSIVE */
+/* WEATHER BADGES */
+.weather-live-badge{display:inline-block;background:#e74c3c;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;animation:pulse-live 2s infinite;margin-right:4px;vertical-align:middle}
+.weather-static-badge{display:inline-block;background:#95a5a6;color:#fff;font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;margin-right:4px;vertical-align:middle}
+.weather-loading-badge{display:inline-block;background:#3498db;color:#fff;font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;animation:pulse-live 1.5s infinite;margin-right:4px;vertical-align:middle}
+@keyframes pulse-live{0%,100%{opacity:1}50%{opacity:.5}}
+.weather-loading-overlay{display:none;position:fixed;top:56px;left:0;right:0;z-index:999;background:linear-gradient(135deg,#1a3a5c,#0d2137);color:#fff;padding:8px 16px;font-size:11px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.weather-loading-overlay i{margin-right:6px;animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
 @media(max-width:1024px){
     .content-grid{grid-template-columns:1fr}
     .zones-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}

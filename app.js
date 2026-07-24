@@ -10,79 +10,90 @@ const ZONAS = [
     {
         id: "parral", nombre: "Valle de Santiago - El Parral", municipio: "Hidalgo del Parral",
         altitud: "1650 msnm",
-        clima: { temp: "18°C", humedad: "45%", viento: "12 km/h", uv: "8" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["arcilloso", "franco"],
-        descripcion: "Zona histórica vitivinícola con tradición desde el siglo XVII. Clima semiárido con lluvias estacionales."
+        descripcion: "Zona histórica vitivinícola con tradición desde el siglo XVII. Clima semiárido con lluvias estacionales.",
+        weatherLocation: "Hidalgo del Parral, Chihuahua"
     },
     {
         id: "santacruz", nombre: "Santa Cruz de Rosales", municipio: "Santa Cruz de Rosales",
         altitud: "1400 msnm",
-        clima: { temp: "20°C", humedad: "38%", viento: "15 km/h", uv: "9" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["arenoso", "calizo"],
-        descripcion: "Región con suelos calcáreos ideales para uvas de mesa y vinificación. Clima continental seco."
+        descripcion: "Región con suelos calcáreos ideales para uvas de mesa y vinificación. Clima continental seco.",
+        weatherLocation: "Santa Cruz de Rosales, Chihuahua"
     },
     {
         id: "aldama", nombre: "Aldama", municipio: "Aldama",
         altitud: "1200 msnm",
-        clima: { temp: "22°C", humedad: "35%", viento: "18 km/h", uv: "10" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["arenoso", "negro"],
-        descripcion: "Zona emergente de viticultura moderna con tecnología de riego por goteo. Suelos arenosos bien drenados."
+        descripcion: "Zona emergente de viticultura moderna con tecnología de riego por goteo. Suelos arenosos bien drenados.",
+        weatherLocation: "Aldama, Chihuahua"
     },
     {
         id: "saucillo", nombre: "Saucillo", municipio: "Saucillo",
         altitud: "1100 msnm",
-        clima: { temp: "24°C", humedad: "30%", viento: "20 km/h", uv: "11" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["arcilloso", "arenoso"],
-        descripcion: "Región cálida con alta insolación. Producción de uvas para elaboración de vinos tintos robustos."
+        descripcion: "Región cálida con alta insolación. Producción de uvas para elaboración de vinos tintos robustos.",
+        weatherLocation: "Saucillo, Chihuahua"
     },
     {
         id: "valle_allende", nombre: "Valle de Allende", municipio: "Allende",
         altitud: "1550 msnm",
-        clima: { temp: "19°C", humedad: "42%", viento: "14 km/h", uv: "8" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["franco", "calizo"],
-        descripcion: "Zona con microclima favorable para cabernet sauvignon y tempranillo. Suelos francos con buen drenaje."
+        descripcion: "Zona con microclima favorable para cabernet sauvignon y tempranillo. Suelos francos con buen drenaje.",
+        weatherLocation: "Valle de Allende, Chihuahua"
     },
     {
         id: "jimenez", nombre: "Jiménez", municipio: "Jiménez",
         altitud: "1300 msnm",
-        clima: { temp: "21°C", humedad: "40%", viento: "16 km/h", uv: "9" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["negro", "arcilloso"],
-        descripcion: "Región con suelos ricos en materia orgánica. Ideal para variedades de uva white y garnacha."
+        descripcion: "Región con suelos ricos en materia orgánica. Ideal para variedades de uva white y garnacha.",
+        weatherLocation: "Jiménez, Chihuahua"
     },
     {
         id: "camargo", nombre: "Camargo", municipio: "Camargo",
         altitud: "1050 msnm",
-        clima: { temp: "25°C", humedad: "28%", viento: "22 km/h", uv: "11" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["calizo", "arenoso"],
-        descripcion: "Zona árida con alto estrés hídrico que favorece la concentración de azúcares en la uva."
+        descripcion: "Zona árida con alto estrés hídrico que favorece la concentración de azúcares en la uva.",
+        weatherLocation: "Camargo, Chihuahua"
     },
     {
         id: "santa_isabel", nombre: "Santa Isabel", municipio: "Santa Isabel",
         altitud: "1180 msnm",
-        clima: { temp: "23°C", humedad: "32%", viento: "17 km/h", uv: "10" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["arenoso", "franco"],
-        descripcion: "Zona en el Valle de San Buenaventura con producción diversificada de uva de mesa y vinífera. Suelos francos-arenosos con buen drenaje natural."
+        descripcion: "Zona en el Valle de San Buenaventura con producción diversificada de uva de mesa y vinífera. Suelos francos-arenosos con buen drenaje natural.",
+        weatherLocation: "Santa Isabel, Chihuahua"
     },
     {
         id: "cuauhtemoc", nombre: "Cuauhtémoc", municipio: "Cuauhtémoc",
         altitud: "2060 msnm",
-        clima: { temp: "14°C", humedad: "50%", viento: "20 km/h", uv: "9" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["franco", "negro"],
-        descripcion: "Zona alta del estado con clima frío y mayor humedad. Suelos ricos en materia orgánica aptos para variedades de clima templado."
+        descripcion: "Zona alta del estado con clima frío y mayor humedad. Suelos ricos en materia orgánica aptos para variedades de clima templado.",
+        weatherLocation: "Cuauhtémoc, Chihuahua"
     },
     {
         id: "delicias", nombre: "Delicias", municipio: "Delicias",
         altitud: "1140 msnm",
-        clima: { temp: "24°C", humedad: "30%", viento: "19 km/h", uv: "11" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["arenoso", "arcilloso"],
-        descripcion: "Zona agrícola intensiva del sur de Chihuahua. Alto potencial vitivinícola con riego tecnizado y clima cálido-seco."
+        descripcion: "Zona agrícola intensiva del sur de Chihuahua. Alto potencial vitivinícola con riego tecnizado y clima cálido-seco.",
+        weatherLocation: "Delicias, Chihuahua"
     },
     {
         id: "namiquipa", nombre: "Namiquipa", municipio: "Namiquipa",
         altitud: "1880 msnm",
-        clima: { temp: "15°C", humedad: "48%", viento: "16 km/h", uv: "8" },
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["franco", "calizo"],
-        descripcion: "Región montañosa con microclimas variados. Tradición agrícola incipiente en viticultura con suelos calizos y franqueados."
+        descripcion: "Región montañosa con microclimas variados. Tradición agrícola incipiente en viticultura con suelos calizos y franqueados.",
+        weatherLocation: "Namiquipa, Chihuahua"
     }
 ];
 
@@ -140,68 +151,63 @@ const SUELOS_DATA = {
 };
 
 const PRODUCTO_IMG = {
-    "Azufre mojable": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
-    "Azufre micronizado": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
-    "Myclobutanil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Alto 10 WG": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Azufre micronizado 80 WDG": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
     "Bicarbonato de potasio": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Cobre hidróxido": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&h=200&fit=crop",
-    "Cobre oxicloruro": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&h=200&fit=crop",
-    "Fosfito de potasio": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
-    "Mancozeb": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Fludioxonil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Pirimetanil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Bacillus subtilis": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Clorotalonil": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Captan": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Cobre + Azufre": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&h=200&fit=crop",
-    "Sulfato de hierro": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Aliette WG": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Cobre hidróxido 77 WG": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&h=200&fit=crop",
+    "Mancozeb 80 WDG": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Signum": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Folicur 250 EW": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Serenade ASO": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Forum Gold": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Captan 50 WP": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
     "Quelato de hierro Fe-EDDHA": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
-    "Extracto de algas marinas": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Humato de potasio + Fe": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
-    "Nitrato de calcio": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
-    "Urea foliar": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Kelatex Fe": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Plantafol 30-10-10": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
+    "Basfoliar Ca SL": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
     "Harina de sangre": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Baba de caracol": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Sulfato de calcio (yeso)": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
-    "Caolín": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
-    "Sombra parcial (mallas)": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
+    "Caolín (Airvol 580)": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
     "Silicato de potasio": "https://images.unsplash.com/photo-1611241893603-3c359704e0ee?w=300&h=200&fit=crop",
-    "Abamectina": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Spirodiclofen": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Aceite de neem": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Phytoseiulus persimilis": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Aceite mineral (verano)": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Piretrinas naturales": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Jabón potásico": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Imidacloprid": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Bacillus thuringiensis": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
-    "Captura con feromonas": "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=300&h=200&fit=crop",
-    "Clorpirifós": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
-    "Spinosad": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop"
+    "Belt SC": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Movento SC": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Biocontrol Neem": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Coragen SC": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Albardón (aceite mineral)": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Crymax GDA": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Danisaraba CL": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Spinosad 480 SC": "https://images.unsplash.com/photo-1532634922-8fe0b757fb13?w=300&h=200&fit=crop",
+    "Alika": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Amistar Xtra": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop",
+    "Flint 50 WG": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?w=300&h=200&fit=crop"
 };
 
 function getProductoImgClass(nombre, tipo) {
-    if (tipo && tipo.toLowerCase().includes("fungicida")) return "fungicida";
-    if (tipo && tipo.toLowerCase().includes("herbicida")) return "herbicida";
-    if (tipo && tipo.toLowerCase().includes("fertilizante")) return "fertilizante";
-    if (tipo && tipo.toLowerCase().includes("acaricida")) return "acaricida";
-    if (tipo && tipo.toLowerCase().includes("insecticida")) return "insecticida";
-    if (tipo && (tipo.toLowerCase().includes("biocontrol") || tipo.toLowerCase().includes("biológico"))) return "biocontrol";
-    if (tipo && (tipo.toLowerCase().includes("protector") || tipo.toLowerCase().includes("solar"))) return "protector";
-    if (tipo && tipo.toLowerCase().includes("trampa")) return "trampa";
+    const t = (tipo || "").toLowerCase();
+    const n = (nombre || "").toLowerCase();
+    if (t.includes("fungicida") || t.includes("fungi")) return "fungicida";
+    if (t.includes("herbicida")) return "herbicida";
+    if (t.includes("fertilizante") || t.includes("foliar") || t.includes("quelato") || t.includes("nutrición")) return "fertilizante";
+    if (t.includes("acaricida")) return "acaricida";
+    if (t.includes("insecticida") || n.includes("insecticida")) return "insecticida";
+    if (t.includes("biocontrol") || t.includes("biológico") || t.includes("biofungicida") || t.includes("bioinsecticida")) return "biocontrol";
+    if (t.includes("protector") || t.includes("solar") || t.includes("protect")) return "protector";
+    if (t.includes("trampa") || t.includes("feromona")) return "trampa";
+    if (t.includes("coadyuvante")) return "protector";
     return "fungicida";
 }
 
 function getProductoIcon(nombre, tipo) {
     const t = (tipo || "").toLowerCase();
-    if (t.includes("fungicida")) return "fa-shield-virus";
+    if (t.includes("fungicida") || t.includes("fungi")) return "fa-shield-virus";
     if (t.includes("herbicida")) return "fa-leaf";
-    if (t.includes("fertilizante")) return "fa-seedling";
+    if (t.includes("fertilizante") || t.includes("foliar") || t.includes("quelato") || t.includes("nutrición")) return "fa-seedling";
     if (t.includes("acaricida")) return "fa-bug";
     if (t.includes("insecticida")) return "fa-bugs";
-    if (t.includes("biocontrol") || t.includes("biológico")) return "fa-dna";
-    if (t.includes("protector") || t.includes("solar")) return "fa-sun";
-    if (t.includes("trampa")) return "fa-crosshairs";
+    if (t.includes("biocontrol") || t.includes("biológico") || t.includes("biofungicida") || t.includes("bioinsecticida")) return "fa-dna";
+    if (t.includes("protector") || t.includes("solar") || t.includes("protect")) return "fa-sun";
+    if (t.includes("trampa") || t.includes("feromona")) return "fa-crosshairs";
+    if (t.includes("coadyuvante")) return "fa-vial";
     return "fa-flask";
 }
 
@@ -224,10 +230,10 @@ const ENFERMEDADES = [
         sintomas: ["Manchas blancas polvorientas en hojas", "Deformación de hojas jóvenes", "Grietas en frutos", "Caída prematura de hojas"],
         condiciones: "Temperatura 21-30°C, humedad 40-70%, alta luz UV",
         productos: [
-            { nombre: "Azufre mojable", tipo: "Fungicida de contacto", dosis: "3-5 kg/ha", organico: false },
-            { nombre: "Azufre micronizado", tipo: "Fungicida de contacto", dosis: "8-12 kg/ha", organico: true },
-            { nombre: "Myclobutanil", tipo: "Fungicida sistémico", dosis: "0.25 mL/L", organico: false },
-            { nombre: "Bicarbonato de potasio", tipo: "Fungicida de contacto", dosis: "3-5 g/L", organico: true }
+            { nombre: "Alto 10 WG", tipo: "Fungicida sistémico (difenoconazol + trifloxistrobina)", dosis: "0.25 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Azufre micronizado 80 WDG", tipo: "Fungicida de contacto", dosis: "8-12 kg/ha", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Amistar Xtra", tipo: "Fungicida sistémico (azoxistrobina + ciproconazol)", dosis: "0.375 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Bicarbonato de potasio", tipo: "Fungicida de contacto", dosis: "3-5 g/L", organico: true, proveedor: "AgroChimayo", proveedorUrl: "https://agrochimayo.com/" }
         ]
     },
     {
@@ -237,10 +243,10 @@ const ENFERMEDADES = [
         sintomas: ["Amarillamiento en haz de hojas", "Moho blanco en envés", "Aceitunas falsas en racimos", "Marchitez de punta de sarmón"],
         condiciones: "Temperatura 15-25°C, humedad >85%, lluvia frecuente",
         productos: [
-            { nombre: "Cobre hidróxido", tipo: "Fungicida de contacto", dosis: "2-3 g/L", organico: false },
-            { nombre: "Cobre oxicloruro", tipo: "Fungicida de contacto", dosis: "3-4 g/L", organico: false },
-            { nombre: "Fosfito de potasio", tipo: "Fungicida sistémico", dosis: "2-3 mL/L", organico: true },
-            { nombre: "Mancozeb", tipo: "Fungicida de contacto", dosis: "2.5 g/L", organico: false }
+            { nombre: "Aliette WG", tipo: "Fungicida sistémico (fosfito de aluminio)", dosis: "2.5-5 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Cobre hidróxido 77 WG", tipo: "Fungicida de contacto", dosis: "2-3 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Forum Gold", tipo: "Fungicida sistémico (fosfonato de potasio)", dosis: "2-3 mL/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Mancozeb 80 WDG", tipo: "Fungicida de contacto multi-sitio", dosis: "2.5 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" }
         ]
     },
     {
@@ -250,10 +256,10 @@ const ENFERMEDADES = [
         sintomas: ["Moho gris sobre racimos", "Podredumbre blanda en frutos", "Marchitez de flores", "Manchas acuosas en hojas"],
         condiciones: "Temperatura 15-23°C, humedad >90%, poca ventilación",
         productos: [
-            { nombre: "Fludioxonil", tipo: "Fungicida de contacto", dosis: "0.3 mL/L", organico: false },
-            { nombre: "Pirimetanil", tipo: "Fungicida sistémico", dosis: "0.5 g/L", organico: false },
-            { nombre: "Bacillus subtilis", tipo: "Biofungicida", dosis: "1-2 g/L", organico: true },
-            { nombre: "Clorotalonil", tipo: "Fungicida de contacto", dosis: "2 mL/L", organico: false }
+            { nombre: "Signum", tipo: "Fungicida sistémico (fludioxonil + piraclostrobina)", dosis: "0.3 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Folicur 250 EW", tipo: "Fungicida sistémico (tebuconazol)", dosis: "0.5 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Serenade ASO", tipo: "Biofungicida (Bacillus subtilis)", dosis: "1-2 g/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Flint 50 WG", tipo: "Fungicida sistémico (trifloxistrobina)", dosis: "0.2 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" }
         ]
     },
     {
@@ -263,10 +269,10 @@ const ENFERMEDADES = [
         sintomas: ["Manchas circulares marrones en hojas", "Puntos negros en manchas (picnidios)", "Frutos negros y momificados", "Secado de escobones"],
         condiciones: "Temperatura 20-30°C, humedad alta, lluvia",
         productos: [
-            { nombre: "Mancozeb", tipo: "Fungicida de contacto", dosis: "2.5 g/L", organico: false },
-            { nombre: "Captan", tipo: "Fungicida de contacto", dosis: "2-3 g/L", organico: false },
-            { nombre: "Fosfito de potasio", tipo: "Fungicida sistémico", dosis: "2-3 mL/L", organico: true },
-            { nombre: "Cobre + Azufre", tipo: "Mezcla de contacto", dosis: "Según etiqueta", organico: false }
+            { nombre: "Mancozeb 80 WDG", tipo: "Fungicida de contacto multi-sitio", dosis: "2.5 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Captan 50 WP", tipo: "Fungicida de contacto", dosis: "2-3 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Forum Gold", tipo: "Fungicida sistémico (fosfonato de potasio)", dosis: "2-3 mL/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" },
+            { nombre: "Amistar Xtra", tipo: "Fungicida sistémico (azoxistrobina + ciproconazol)", dosis: "0.375 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fungicidas" }
         ]
     },
     {
@@ -276,10 +282,10 @@ const ENFERMEDADES = [
         sintomas: ["Amarillamiento entre nervaduras", "Hojas jóvenes más afectadas", "Nervaduras permanecen verdes", "Crecimiento reducido"],
         condiciones: "Suelo con pH >7.5, exceso de cal, suelos calizos",
         productos: [
-            { nombre: "Sulfato de hierro", tipo: "Fertilizante inorgánico", dosis: "5-10 g/L", organico: false },
-            { nombre: "Quelato de hierro Fe-EDDHA", tipo: "Fertilizante inorgánico", dosis: "3-5 g/L", organico: false },
-            { nombre: "Extracto de algas marinas", tipo: "Fertilizante orgánico", dosis: "2-3 mL/L", organico: true },
-            { nombre: "Humato de potasio + Fe", tipo: "Fertilizante orgánico", dosis: "2 mL/L", organico: true }
+            { nombre: "Kelatex Fe", tipo: "Fertilizante foliar (quelato de hierro)", dosis: "3-5 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" },
+            { nombre: "Quelato de hierro Fe-EDDHA", tipo: "Fertilizante inorgánico", dosis: "3-5 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" },
+            { nombre: "Basfoliar Ca SL", tipo: "Fertilizante foliar (calcio + hierro)", dosis: "2-3 mL/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" },
+            { nombre: "Alika", tipo: "Fertilizante inorgánico (sulfato de hierro)", dosis: "5-10 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" }
         ]
     },
     {
@@ -289,10 +295,10 @@ const ENFERMEDADES = [
         sintomas: ["Amarillamiento de hojas viejas", "Crecimiento lento del sarmón", "Racimos pequeños", "Hojas caídas prematuramente"],
         condiciones: "Suelos pobres en MO, lixiviación por lluvia, suelos arenosos",
         productos: [
-            { nombre: "Nitrato de calcio", tipo: "Fertilizante inorgánico", dosis: "15-20 g/L", organico: false },
-            { nombre: "Urea foliar", tipo: "Fertilizante inorgánico", dosis: "5-10 g/L", organico: false },
-            { nombre: "Harina de sangre", tipo: "Fertilizante orgánico", dosis: "50-100 g/planta", organico: true },
-            { nombre: "Baba de caracol", tipo: "Fertilizante orgánico", dosis: "5 mL/L", organico: true }
+            { nombre: "Plantafol 30-10-10", tipo: "Fertilizante foliar (nitrógeno alto)", dosis: "15-20 g/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" },
+            { nombre: "Basfoliar Ca SL", tipo: "Fertilizante foliar (calcio)", dosis: "10-15 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" },
+            { nombre: "Harina de sangre", tipo: "Fertilizante orgánico", dosis: "50-100 g/planta", organico: true, proveedor: "AgroChimayo", proveedorUrl: "https://agrochimayo.com/" },
+            { nombre: "Alika", tipo: "Fertilizante foliar (nitrógeno + microelementos)", dosis: "10-15 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" }
         ]
     },
     {
@@ -302,10 +308,10 @@ const ENFERMEDADES = [
         sintomas: ["Manchas blanquecinas en frutos", "Arrugamiento de piel expuesta", "Secado parcial de racimos", "Craqueado de epicarpio"],
         condiciones: "Alta radiación UV, temperaturas >35°C, baja cobertura foliar",
         productos: [
-            { nombre: "Sulfato de calcio (yeso)", tipo: "Protector foliar", dosis: "10-15 g/L", organico: true },
-            { nombre: "Caolín", tipo: "Protector solar", dosis: "30-50 g/L", organico: true },
-            { nombre: "Sombra parcial (mallas)", tipo: "Protección física", dosis: "30-50% reducción UV", organico: true },
-            { nombre: "Silicato de potasio", tipo: "Fortalecedor foliar", dosis: "2-3 mL/L", organico: false }
+            { nombre: "Caolín (Airvol 580)", tipo: "Protector solar foliar", dosis: "30-50 g/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" },
+            { nombre: "Silicato de potasio", tipo: "Fortalecedor foliar (silicio + potasio)", dosis: "2-3 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/fertilizantes-foliares" },
+            { nombre: "Sombra parcial (mallas)", tipo: "Protección física", dosis: "30-50% reducción UV", organico: true, proveedor: "AgroChimayo", proveedorUrl: "https://agrochimayo.com/" },
+            { nombre: "Bicarbonato de potasio", tipo: "Protector de cutícula", dosis: "3-5 g/L", organico: true, proveedor: "AgroChimayo", proveedorUrl: "https://agrochimayo.com/" }
         ]
     },
     {
@@ -315,10 +321,10 @@ const ENFERMEDADES = [
         sintomas: ["Punteado amarillo en hojas", "Telarañas finas en envés", "Decoloración plateada", "Caída de hojas en infestaciones severas"],
         condiciones: "Clima cálido y seco, humedad <40%, ausencia de enemigos naturales",
         productos: [
-            { nombre: "Abamectina", tipo: "Acaricida sistémico", dosis: "0.75 mL/L", organico: false },
-            { nombre: "Spirodiclofen", tipo: "Acaricida sistémico", dosis: "0.3 mL/L", organico: false },
-            { nombre: "Aceite de neem", tipo: "Acaricida orgánico", dosis: "5-10 mL/L", organico: true },
-            { nombre: "Phytoseiulus persimilis", tipo: "Control biológico", dosis: "20-30 individuos/planta", organico: true }
+            { nombre: "Belt SC", tipo: "Insecticida/Acaricida (flubendiamide)", dosis: "0.75 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Movento SC", tipo: "Insecticida/Acaricida (spirotetramat)", dosis: "0.3 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Biocontrol Neem", tipo: "Acaricida orgánico (azadiractina)", dosis: "5-10 mL/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Phytoseiulus persimilis", tipo: "Control biológico (ácaro depredador)", dosis: "20-30 individuos/planta", organico: true, proveedor: "Unifrut", proveedorUrl: "https://www.unifrut.com.mx/" }
         ]
     },
     {
@@ -328,10 +334,10 @@ const ENFERMEDADES = [
         sintomas: ["Masas algodonosas blancas en tronco", "Melaza pegajosa en superficies", "Hollín negro (fumagina)", "Debilitamiento de la planta"],
         condiciones: "Temperaturas de 20-30°C, protección del viento, baja luminosidad",
         productos: [
-            { nombre: "Aceite mineral (verano)", tipo: "Insecticida de contacto", dosis: "15-20 mL/L", organico: false },
-            { nombre: "Piretrinas naturales", tipo: "Insecticida de contacto", dosis: "1-2 mL/L", organico: true },
-            { nombre: "Jabón potásico", tipo: "Insecticida orgánico", dosis: "10-15 mL/L", organico: true },
-            { nombre: "Imidacloprid", tipo: "Insecticida sistémico", dosis: "0.25 mL/L", organico: false }
+            { nombre: "Coragen SC", tipo: "Insecticida sistémico (clorantraniliprol)", dosis: "0.25 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Albardón (aceite mineral)", tipo: "Insecticida de contacto (aceite mineral)", dosis: "15-20 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Jabón potásico", tipo: "Insecticida orgánico", dosis: "10-15 mL/L", organico: true, proveedor: "AgroChimayo", proveedorUrl: "https://agrochimayo.com/" },
+            { nombre: "Alika", tipo: "Insecticida sistémico (tiametoxam + lambda-cialotrina)", dosis: "0.25 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" }
         ]
     },
     {
@@ -341,10 +347,10 @@ const ENFERMEDADES = [
         sintomas: ["Hilos de seda en racimos", "Orificios de entrada en frutos", "Excrementos larvae dentro del racimo", "Pudrición secundaria en heridas"],
         condiciones: "Temperatura 15-30°C, varias generaciones por año",
         productos: [
-            { nombre: "Bacillus thuringiensis", tipo: "Bioinsecticida", dosis: "1-2 g/L", organico: true },
-            { nombre: "Captura con feromonas", tipo: "Trampa", dosis: "5 trampas/ha", organico: true },
-            { nombre: "Clorpirifós", tipo: "Insecticida sistémico", dosis: "1.5 mL/L", organico: false },
-            { nombre: "Spinosad", tipo: "Bioinsecticida", dosis: "0.5-1 mL/L", organico: true }
+            { nombre: "Crymax GDA", tipo: "Bioinsecticida (Bacillus thuringiensis kurstaki)", dosis: "1-2 g/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Captura con feromonas", tipo: "Trampa de monitoreo", dosis: "5 trampas/ha", organico: true, proveedor: "Unifrut", proveedorUrl: "https://www.unifrut.com.mx/" },
+            { nombre: "Coragen SC", tipo: "Insecticida sistémico (clorantraniliprol)", dosis: "0.15 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Spinosad 480 SC", tipo: "Bioinsecticida (spinosad)", dosis: "0.5-1 mL/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" }
         ]
     }
 ];
@@ -361,6 +367,51 @@ let currentDetection = {};
 let currentPhotos = [];
 let nextId = 1;
 let nextUserId = 5;
+let weatherLoaded = false;
+
+/* ===== WEATHER API ===== */
+async function fetchWeather() {
+    const loadingEl = document.getElementById("weatherLoading");
+    if (loadingEl) loadingEl.style.display = "flex";
+
+    const fetches = ZONAS.map(async (zona) => {
+        try {
+            const res = await fetch(`https://wttr.in/${encodeURIComponent(zona.weatherLocation)}?format=j1`);
+            if (!res.ok) return;
+            const data = await res.json();
+            const current = data.current_condition && data.current_condition[0];
+            if (!current) return;
+
+            zona.clima.temp = `${current.temp_C}°C`;
+            zona.clima.humedad = `${current.humidity}%`;
+            zona.clima.viento = `${current.windspeedKmph} km/h`;
+            zona.clima.uv = current.uvIndex || "—";
+            zona.clima.weatherDesc = (current.weatherDesc && current.weatherDesc[0] && current.weatherDesc[0].value) || "";
+            zona.clima.feelsLike = `${current.FeelsLikeC}°C`;
+            zona.clima.lastUpdate = current.localObsDateTime || current.observation_time || "";
+        } catch (e) {
+            console.warn(`Weather fetch failed for ${zona.municipio}:`, e);
+        }
+    });
+
+    await Promise.allSettled(fetches);
+    weatherLoaded = true;
+    if (loadingEl) loadingEl.style.display = "none";
+
+    renderZoneCards();
+    renderMap();
+    renderDetectionsWeather();
+}
+
+function renderDetectionsWeather() {
+    document.querySelectorAll(".detection-weather-live, .analysis-weather-live").forEach(el => {
+        const zonaId = el.dataset.zonaId;
+        const zona = ZONAS.find(z => z.id === zonaId);
+        if (zona && zona.clima.lastUpdate) {
+            el.innerHTML = `<span class="weather-live-badge">🔴 EN VIVO</span> ${zona.clima.temp} | 💧 ${zona.clima.humedad} | 💨 ${zona.clima.viento}`;
+        }
+    });
+}
 
 function init() {
     loadUsers();
@@ -378,6 +429,7 @@ function init() {
     renderRecentDetections();
     renderAllDetections();
     renderUsers();
+    fetchWeather();
 }
 
 /* ===== USERS ===== */
@@ -635,6 +687,10 @@ function analyzePhoto() {
         ? `<div class="analysis-photos-grid">${currentDetection.photos.map((p, i) => `<img src="${p}" alt="Foto ${i + 1}">`).join("")}</div>`
         : `<img src="${currentDetection.photo}" alt="Foto analizada">`;
 
+    const weatherBadge = zona.clima.lastUpdate
+        ? `<span class="weather-live-badge">🔴 EN VIVO</span>`
+        : `<span class="weather-static-badge">📊 Datos estáticos</span>`;
+
     const card = document.getElementById("analysisCard");
     card.style.display = "block";
     document.getElementById("analysisResult").innerHTML = `
@@ -644,8 +700,11 @@ function analyzePhoto() {
         </div>
         <div class="analysis-right">
             <div class="analysis-item"><h4>Zona Detectada</h4><p>${zona.nombre}, ${zona.municipio}</p></div>
-            <div class="analysis-item"><h4>Clima Actual</h4>
-                <p>🌡 ${zona.clima.temp} | 💧 ${zona.clima.humedad} | 💨 ${zona.clima.viento} | ☀️ UV ${zona.clima.uv}</p>
+            <div class="analysis-item"><h4>Clima Actual ${weatherBadge}</h4>
+                <p>🌡 ${zona.clima.temp} ${zona.clima.feelsLike ? `(Sensación: ${zona.clima.feelsLike})` : ''} | 💧 ${zona.clima.humedad} | 💨 ${zona.clima.viento} | ☀️ UV ${zona.clima.uv}</p>
+                ${zona.clima.weatherDesc ? `<p style="font-size:11px;color:#555;margin-top:2px">Condición: ${zona.clima.weatherDesc}</p>` : ''}
+                ${zona.clima.lastUpdate ? `<p style="font-size:10px;color:#999;margin-top:2px">Última observación: ${zona.clima.lastUpdate}</p>` : ''}
+                <p style="font-size:10px;color:#999;margin-top:2px">Fuente: <a href="https://wttr.in" target="_blank" rel="noopener">wttr.in</a> (The Weather Channel data)</p>
             </div>
             <div class="analysis-item"><h4>Tipo de Suelo</h4>
                 <p>${suelo.nombre} — pH: ${suelo.ph}</p>
@@ -675,12 +734,16 @@ function analyzePhoto() {
                     <h4>${recommended.nombre}</h4>
                     <p style="font-size:12px">Dosis: ${recommended.dosis}</p>
                     <p style="font-size:11px;color:#555">${recommended.orgánico ? "✅ Producto orgánico" : "⚗️ Producto inorgánico/sintético"}</p>
+                    ${recommended.proveedor ? `<p style="font-size:10px;color:#1a3a5c;margin-top:4px"><i class="fas fa-store"></i> Proveedor: <a href="${recommended.proveedorUrl}" target="_blank" rel="noopener" style="color:#1a3a5c;font-weight:600">${recommended.proveedor}</a></p>` : ''}
                 </div>
             </div>
             <div class="analysis-item"><h4>Nutrientes del Suelo</h4>
                 <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:4px">
                     ${Object.entries(suelo.nutrientes).map(([k, v]) => `<span style="font-size:11px"><b>${k.toUpperCase()}:</b> ${v}</span>`).join("")}
                 </div>
+            </div>
+            <div class="analysis-item" style="margin-top:8px">
+                <p style="font-size:10px;color:#999">Todos los productos están disponibles en: <a href="https://www.ftepeyac.com.mx/" target="_blank" rel="noopener" style="color:#1a3a5c">Fertilizantes Tepeyac</a> | <a href="https://www.unifrut.com.mx/" target="_blank" rel="noopener" style="color:#1a3a5c">Unifrut</a> | <a href="https://agrochimayo.com/" target="_blank" rel="noopener" style="color:#1a3a5c">AgroChimayo</a></p>
             </div>
         </div>
     `;
@@ -745,12 +808,15 @@ function renderMap() {
         const lat = getLat(z.id);
         const lng = getLng(z.id);
         const marker = L.marker([lat, lng], { icon: navyIcon }).addTo(map);
+        const weatherLine = z.clima.lastUpdate
+            ? `<span style="font-size:11px;color:#e74c3c;font-weight:600">🔴 EN VIVO: ${z.clima.temp} | 💧 ${z.clima.humedad} | 💨 ${z.clima.viento}</span><br>`
+            : `<span style="font-size:11px">Cargando clima...</span><br>`;
         marker.bindPopup(`
-            <div style="font-family:Inter,sans-serif;min-width:180px">
+            <div style="font-family:Inter,sans-serif;min-width:200px">
                 <strong style="font-size:13px;color:#1a3a5c">${z.nombre}</strong><br>
                 <span style="font-size:11px;color:#555">${z.municipio} — ${z.altitud}</span><br>
-                <span style="font-size:11px">🌡 ${z.clima.temp} | 💧 ${z.clima.humedad}</span><br>
-                <span style="font-size:11px">💨 ${z.clima.viento} | ☀️ UV ${z.clima.uv}</span><br>
+                ${weatherLine}
+                <span style="font-size:10px;color:#999">Fuente: wttr.in</span><br>
                 <a href="#" onclick="event.preventDefault();showZoneDetail('${z.id}')" style="font-size:11px;color:#1a3a5c;font-weight:600">Ver detalles →</a>
             </div>
         `);
@@ -785,6 +851,9 @@ function renderZoneCards() {
     const grid = document.getElementById("zonesGrid");
     grid.innerHTML = ZONAS.map(z => {
         const soils = z.suelos.map(s => SUELOS_DATA[s]);
+        const weatherBadge = z.clima.lastUpdate
+            ? `<span class="weather-live-badge">🔴 EN VIVO</span>`
+            : (weatherLoaded ? `<span class="weather-static-badge">⏳ Sin datos</span>` : `<span class="weather-loading-badge">⏳ Cargando...</span>`);
         return `
         <div class="zone-card" id="zone-${z.id}">
             <div class="zone-card-header">
@@ -794,11 +863,13 @@ function renderZoneCards() {
             <div class="zone-card-body">
                 <p style="font-size:13px;color:#555;margin-bottom:12px">${z.descripcion}</p>
                 <div class="zone-climate">
-                    <div class="climate-item"><i class="fas fa-thermometer-half"></i><span class="val">${z.clima.temp}</span><span class="lbl">Temp. Promedio</span></div>
+                    <div class="climate-item"><i class="fas fa-thermometer-half"></i><span class="val">${z.clima.temp}</span><span class="lbl">Temperatura</span></div>
                     <div class="climate-item"><i class="fas fa-tint"></i><span class="val">${z.clima.humedad}</span><span class="lbl">Humedad</span></div>
                     <div class="climate-item"><i class="fas fa-wind"></i><span class="val">${z.clima.viento}</span><span class="lbl">Viento</span></div>
                     <div class="climate-item"><i class="fas fa-sun"></i><span class="val">UV ${z.clima.uv}</span><span class="lbl">Radiación UV</span></div>
                 </div>
+                <div style="text-align:center;margin:6px 0">${weatherBadge}</div>
+                ${z.clima.weatherDesc ? `<p style="font-size:11px;color:#555;text-align:center;margin-bottom:6px">Condición: ${z.clima.weatherDesc}</p>` : ''}
                 ${soils.map(s => `
                 <div class="soil-section">
                     <h4>Tipo de Suelo: ${s.nombre}</h4>
@@ -839,6 +910,7 @@ function renderEnfermedadCards() {
                             ${renderProductImg(p, 70)}
                             <b>${p.nombre}</b> — ${p.tipo}<br>
                             Dosis: ${p.dosis} ${p.orgánico ? '🌱' : '⚗️'}
+                            ${p.proveedor ? `<br><a href="${p.proveedorUrl}" target="_blank" rel="noopener" style="color:#1a3a5c;font-size:10px"><i class="fas fa-store"></i> ${p.proveedor}</a>` : ''}
                         </div>
                     `).join("")}
                 </div>
@@ -916,6 +988,11 @@ function renderDetectionCard(d) {
     const photosHtml = d.photos && d.photos.length > 1
         ? `<div class="detection-photos">${d.photos.map((p, i) => `<img src="${p}" alt="Foto ${i + 1}">`).join("")}</div>`
         : `<img src="${d.photo}" alt="detección">`;
+
+    const weatherLine = zona && zona.clima.lastUpdate
+        ? `<span class="weather-live-badge">🔴 EN VIVO</span> ${zona.clima.temp} | 💧 ${zona.clima.humedad}`
+        : '';
+
     return `
     <div class="detection-card" id="detection-${d.id}">
         ${photosHtml}
@@ -928,6 +1005,7 @@ function renderDetectionCard(d) {
                 <span><i class="fas fa-clock"></i> ${d.hora}</span>
                 <span><i class="fas fa-user"></i> ${user ? user.name : ''}</span>
             </div>
+            ${weatherLine ? `<div style="margin:4px 0"><span style="font-size:11px">${weatherLine}</span></div>` : ''}
             ${enf ? `<span class="enf-tag ${enf.tipo}">${enf.tipoLabel}</span>` : ''}
             ${d.productoRecomendado ? `
             <div style="margin-top:8px">
@@ -936,6 +1014,7 @@ function renderDetectionCard(d) {
                     <span class="prod-type">${d.productoRecomendado.tipo}</span>
                     <h4>${d.productoRecomendado.nombre}</h4>
                     <p style="font-size:11px">Dosis: ${d.productoRecomendado.dosis}</p>
+                    ${d.productoRecomendado.proveedor ? `<a href="${d.productoRecomendado.proveedorUrl}" target="_blank" rel="noopener" style="font-size:10px;color:#1a3a5c"><i class="fas fa-store"></i> ${d.productoRecomendado.proveedor}</a>` : ''}
                 </div>
             </div>` : ''}
             <div class="detection-actions">
@@ -1059,6 +1138,7 @@ function renderHistory() {
                     <p><i class="fas fa-layer-group"></i> Suelo: ${suelo ? suelo.nombre : ''} (pH ${suelo ? suelo.ph : ''})</p>
                     <p><i class="fas fa-clock"></i> ${d.hora} — Registrado por: ${user ? user.name : ''}</p>
                     ${d.productoRecomendado ? `<p><i class="fas fa-pills"></i> Producto: ${d.productoRecomendado.nombre} (${d.productoRecomendado.tipo})</p>` : ''}
+                    ${zona && zona.clima.lastUpdate ? `<p><i class="fas fa-cloud-sun"></i> Clima al momento: ${zona.clima.temp} | 💧 ${zona.clima.humedad}</p>` : ''}
                     <div class="history-tags">
                         ${enf ? `<span class="history-tag enf-tag ${enf.tipo}">${enf.tipoLabel}</span>` : ''}
                     </div>
