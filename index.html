@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusVid - Detección de Enfermedades en Vid</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <div class="avatar">FV</div>
+            <span class="logo-text">FocusVid</span>
+        </div>
+        <button class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-menu" id="navMenu">
+            <a href="#" class="nav-link active" data-section="dashboard"><i class="fas fa-home"></i> Inicio</a>
+            <a href="#" class="nav-link" data-section="zonas"><i class="fas fa-map-marked-alt"></i> Zonas</a>
+            <a href="#" class="nav-link" data-section="enfermedades"><i class="fas fa-virus"></i> Enfermedades</a>
+            <a href="#" class="nav-link" data-section="detecciones"><i class="fas fa-camera"></i> Detecciones</a>
+            <a href="#" class="nav-link" data-section="historial"><i class="fas fa-history"></i> Historial</a>
+        </div>
+        <div class="nav-filters">
+            <select id="filterZona" class="filter-select"><option value="">Todas las Zonas</option></select>
+            <select id="filterSuelo" class="filter-select">
+                <option value="">Todos los Suelos</option>
+                <option value="arcilloso">Arcilloso</option>
+                <option value="arenoso">Arenoso</option>
+                <option value="franco">Franco</option>
+                <option value="calizo">Calizo</option>
+                <option value="negro">Negro</option>
+            </select>
+            <select id="filterEnfermedad" class="filter-select">
+                <option value="">Todas las Enfermedades</option>
+                <option value="fungica">Fúngicas</option>
+                <option value="nutricional">Nutricionales</option>
+                <option value="fisiologico">Fisiológicas</option>
+                <option value="plaga">Plagas / Ácaros</option>
+            </select>
+        </div>
+        <div class="nav-user">
+            <select id="userSelect" class="user-select"></select>
+        </div>
+    </div>
+</nav>
+
+<main class="main-content">
+
+    <!-- ============ DASHBOARD ============ -->
+    <section id="dashboard" class="section active">
+        <div class="section-header"><h1>Dashboard - Viñedos en Chihuahua</h1></div>
+        <div class="stats-grid">
+            <div class="stat-card blue"><i class="fas fa-map-marker-alt"></i><h3 id="statZonas">0</h3><p>Zonas Activas</p></div>
+            <div class="stat-card red"><i class="fas fa-exclamation-triangle"></i><h3 id="statEnfermedades">0</h3><p>Enfermedades Detectadas</p></div>
+            <div class="stat-card green"><i class="fas fa-camera"></i><h3 id="statFotos">0</h3><p>Fotos Registradas</p></div>
+            <div class="stat-card orange"><i class="fas fa-pills"></i><h3 id="statTratamientos">0</h3><p>Tratamientos Registrados</p></div>
+        </div>
+        <div class="content-grid">
+            <div class="card">
+                <div class="card-header"><h2><i class="fas fa-map"></i> Mapa de Zonas Vitivinícolas</h2></div>
+                <div class="card-body"><div class="map-container" id="mapContainer"></div></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><h2><i class="fas fa-clock"></i> Detecciones Recientes</h2></div>
+                <div class="card-body"><div id="recentDetections" class="detections-list"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ZONAS ============ -->
+    <section id="zonas" class="section">
+        <div class="section-header"><h1>Zonas Vitivinícolas de Chihuahua</h1></div>
+        <div class="zones-grid" id="zonesGrid"></div>
+    </section>
+
+    <!-- ============ ENFERMEDADES ============ -->
+    <section id="enfermedades" class="section">
+        <div class="section-header"><h1>Base de Datos de Enfermedades</h1></div>
+        <div class="enfermedades-grid" id="enfermedadesGrid"></div>
+    </section>
+
+    <!-- ============ DETECCIONES ============ -->
+    <section id="detecciones" class="section">
+        <div class="section-header">
+            <h1>Detección de Enfermedades</h1>
+            <button class="btn btn-primary" id="btnNewDetection"><i class="fas fa-plus"></i> Nueva Detección</button>
+        </div>
+
+        <div class="card" id="uploadCard">
+            <div class="card-header"><h2><i class="fas fa-upload"></i> Subir Fotografía para Análisis</h2></div>
+            <div class="card-body">
+                <form id="detectionForm">
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label>Fotografía de la Planta</label>
+                            <div class="upload-area" id="uploadArea">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <p>Arrastra una imagen o haz clic para seleccionar</p>
+                                <input type="file" id="photoUpload" accept="image/*" hidden>
+                            </div>
+                            <div id="photoPreview" class="photo-preview" style="display:none;">
+                                <img id="previewImage" src="" alt="Preview">
+                                <button type="button" class="btn-remove" id="removePhoto"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectZona">Zona / Región</label>
+                            <select id="selectZona" class="form-control" required><option value="">Seleccionar zona...</option></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="selectSuelo">Tipo de Suelo</label>
+                            <select id="selectSuelo" class="form-control" required>
+                                <option value="">Seleccionar suelo...</option>
+                                <option value="arcilloso">Arcilloso</option>
+                                <option value="arenoso">Arenoso</option>
+                                <option value="franco">Franco</option>
+                                <option value="calizo">Calizo</option>
+                                <option value="negro">Negro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Enfermedad (auto-detectada o manual)</label>
+                            <select id="selectEnfermedad" class="form-control">
+                                <option value="">Detección automática por IA...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="btnAnalyze"><i class="fas fa-search"></i> Analizar Fotografía</button>
+                        <button type="submit" class="btn btn-primary" id="btnSaveDetection" disabled><i class="fas fa-save"></i> Guardar Detección</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card" id="analysisCard" style="display:none;">
+            <div class="card-header"><h2><i class="fas fa-microscope"></i> Resultado del Análisis</h2></div>
+            <div class="card-body"><div class="analysis-result" id="analysisResult"></div></div>
+        </div>
+
+        <div class="card">
+            <div class="card-header"><h2><i class="fas fa-list"></i> Todas las Detecciones</h2></div>
+            <div class="card-body"><div id="allDetections" class="detections-grid"></div></div>
+        </div>
+    </section>
+
+    <!-- ============ HISTORIAL ============ -->
+    <section id="historial" class="section">
+        <div class="section-header"><h1>Historial de Enfermedades Detectadas</h1></div>
+        <div class="card">
+            <div class="card-body">
+                <div class="history-filters">
+                    <select id="historyFilterZona" class="filter-select"><option value="">Todas las Zonas</option></select>
+                    <select id="historyFilterEnfermedad" class="filter-select">
+                        <option value="">Todas las Enfermedades</option>
+                        <option value="fungica">Fúngicas</option>
+                        <option value="nutricional">Nutricionales</option>
+                        <option value="fisiologico">Fisiológicas</option>
+                        <option value="plaga">Plagas / Ácaros</option>
+                    </select>
+                    <select id="historyFilterSuelo" class="filter-select">
+                        <option value="">Todos los Suelos</option>
+                        <option value="arcilloso">Arcilloso</option>
+                        <option value="arenoso">Arenoso</option>
+                        <option value="franco">Franco</option>
+                        <option value="calizo">Calizo</option>
+                        <option value="negro">Negro</option>
+                    </select>
+                </div>
+                <div id="historyContent" class="history-content"></div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Edit Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Editar Detección</h2>
+            <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editZona">Zona</label>
+                    <select id="editZona" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label for="editSuelo">Tipo de Suelo</label>
+                    <select id="editSuelo" class="form-control">
+                        <option value="arcilloso">Arcilloso</option>
+                        <option value="arenoso">Arenoso</option>
+                        <option value="franco">Franco</option>
+                        <option value="calizo">Calizo</option>
+                        <option value="negro">Negro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editEnfermedad">Enfermedad</label>
+                    <select id="editEnfermedad" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label for="editProducto">Producto Recomendado</label>
+                    <select id="editProducto" class="form-control"></select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelEdit">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"><span id="toastMessage"></span></div>
+
+<script src="app.js"></script>
+</body>
+</html>
