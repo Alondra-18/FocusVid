@@ -6,7 +6,7 @@ let users = [
     { id: 4, name: "Pedro Sánchez", role: "Administrador de Viñedo" }
 ];
 
-const ZONAS = [
+let ZONAS = [
     {
         id: "parral", nombre: "Valle de Santiago - El Parral", municipio: "Hidalgo del Parral",
         altitud: "1650 msnm",
@@ -65,7 +65,7 @@ const ZONAS = [
     },
     {
         id: "santa_isabel", nombre: "Santa Isabel", municipio: "Santa Isabel",
-        altitud: "1180 msnm",
+        altitud: "1619 msnm",
         clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
         suelos: ["arenoso", "franco"],
         descripcion: "Zona en el Valle de San Buenaventura con producción diversificada de uva de mesa y vinífera. Suelos francos-arenosos con buen drenaje natural.",
@@ -368,6 +368,210 @@ let currentPhotos = [];
 let nextId = 1;
 let nextUserId = 5;
 let weatherLoaded = false;
+let customZonas = [];
+let nextZoneId = 100;
+let zoneModalMap = null;
+let zoneModalMarker = null;
+const DEFAULT_ZONE_IDS = ["parral","santacruz","aldama","saucillo","valle_allende","jimenez","camargo","santa_isabel","cuauhtemoc","delicias","namiquipa"];
+
+function loadCustomZonas() {
+    try {
+        const saved = localStorage.getItem("focusvid_custom_zonas");
+        if (saved) {
+            customZonas = JSON.parse(saved);
+            nextZoneId = customZonas.length ? Math.max(...customZonas.map(z => parseInt(z.id.replace("custom_","")) || 0)) + 1 : 100;
+            ZONAS = [...ZONAS.filter(z => DEFAULT_ZONE_IDS.includes(z.id)), ...customZonas];
+        }
+    } catch (e) {}
+}
+
+function saveCustomZonas() {
+    try { localStorage.setItem("focusvid_custom_zonas", JSON.stringify(customZonas)); } catch (e) {}
+}
+
+function isCustomZone(id) {
+    return !DEFAULT_ZONE_IDS.includes(id);
+}
+
+function getAllZoneCoords() {
+    const builtIn = {
+        parral:{lat:26.93,lng:-105.82}, santacruz:{lat:28.19,lng:-106.04},
+        aldama:{lat:28.83,lng:-105.91}, saucillo:{lat:28.03,lng:-105.33},
+        valle_allende:{lat:26.93,lng:-105.42}, jimenez:{lat:27.13,lng:-104.93},
+        camargo:{lat:27.68,lng:-105.17}, santa_isabel:{lat:28.3422,lng:-106.3683},
+        cuauhtemoc:{lat:28.40,lng:-106.85}, delicias:{lat:28.18,lng:-105.47},
+        namiquipa:{lat:29.25,lng:-106.46}
+    };
+    ZONAS.forEach(z => {
+        if (z.lat && z.lng) builtIn[z.id] = { lat: z.lat, lng: z.lng };
+    });
+    return builtIn;
+}
+
+window.openZoneModal = function(editId) {
+    const modal = document.getElementById("zoneModal");
+    const form = document.getElementById("zoneForm");
+    const title = document.getElementById("zoneModalTitle");
+    form.reset();
+    document.getElementById("zoneEditId").value = "";
+
+    document.querySelectorAll('input[name="zoneSuelos"]').forEach(cb => cb.checked = false);
+
+    if (editId) {
+        const zona = ZONAS.find(z => z.id === editId);
+        if (!zona) return;
+        title.textContent = "Editar Zona";
+        document.getElementById("zoneEditId").value = zona.id;
+        document.getElementById("zoneNombre").value = zona.nombre;
+        document.getElementById("zoneMunicipio").value = zona.municipio;
+        document.getElementById("zoneAltitud").value = zona.altitud.replace(" msnm","");
+        document.getElementById("zoneDescripcion").value = zona.descripcion || "";
+        document.getElementById("zoneWeatherLocation").value = zona.weatherLocation || "";
+        const lat = getLat(zona.id);
+        const lng = getLng(zona.id);
+        document.getElementById("zoneLat").value = lat;
+        document.getElementById("zoneLng").value = lng;
+        if (zona.suelos) {
+            zona.suelos.forEach(s => {
+                const cb = document.querySelector(`input[name="zoneSuelos"][value="${s}"]`);
+                if (cb) cb.checked = true;
+            });
+        }
+        initZoneModalMap(lat, lng);
+    } else {
+        title.textContent = "Agregar Zona";
+        initZoneModalMap(28.0, -106.0);
+    }
+    modal.classList.add("show");
+};
+
+function initZoneModalMap(lat, lng) {
+    setTimeout(() => {
+        const container = document.getElementById("zoneModalMap");
+        if (!container) return;
+        if (zoneModalMap) { zoneModalMap.remove(); zoneModalMap = null; }
+        zoneModalMap = L.map(container).setView([lat, lng], 8);
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: '&copy; OpenStreetMap', maxZoom: 18
+        }).addTo(zoneModalMap);
+
+        const icon = L.divIcon({
+            className: "custom-pin",
+            html: '<div style="width:16px;height:16px;background:#e74c3c;border:3px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4)"></div>',
+            iconSize: [16, 16], iconAnchor: [8, 8], popupAnchor: [0, -12]
+        });
+
+        zoneModalMarker = L.marker([lat, lng], { icon, draggable: true }).addTo(zoneModalMap);
+        zoneModalMarker.bindPopup("Arrastra para ubicar la zona").openPopup();
+
+        zoneModalMarker.on("dragend", function(e) {
+            const pos = e.target.getLatLng();
+            document.getElementById("zoneLat").value = pos.lat.toFixed(4);
+            document.getElementById("zoneLng").value = pos.lng.toFixed(4);
+        });
+
+        zoneModalMap.on("click", function(e) {
+            const pos = e.latlng;
+            zoneModalMarker.setLatLng(pos);
+            document.getElementById("zoneLat").value = pos.lat.toFixed(4);
+            document.getElementById("zoneLng").value = pos.lng.toFixed(4);
+        });
+
+        setTimeout(() => zoneModalMap.invalidateSize(), 100);
+    }, 100);
+}
+
+function setupZoneModal() {
+    document.getElementById("btnAddZone").addEventListener("click", () => openZoneModal());
+    document.getElementById("closeZoneModal").addEventListener("click", () => document.getElementById("zoneModal").classList.remove("show"));
+    document.getElementById("cancelZoneEdit").addEventListener("click", () => document.getElementById("zoneModal").classList.remove("show"));
+    document.getElementById("zoneModal").addEventListener("click", e => { if (e.target === e.currentTarget) e.target.classList.remove("show"); });
+    document.getElementById("zoneForm").addEventListener("submit", saveZone);
+}
+
+function saveZone(e) {
+    e.preventDefault();
+    const editId = document.getElementById("zoneEditId").value;
+    const nombre = document.getElementById("zoneNombre").value.trim();
+    const municipio = document.getElementById("zoneMunicipio").value.trim();
+    const altitud = document.getElementById("zoneAltitud").value.trim();
+    const descripcion = document.getElementById("zoneDescripcion").value.trim();
+    const weatherLocation = document.getElementById("zoneWeatherLocation").value.trim();
+    const lat = parseFloat(document.getElementById("zoneLat").value);
+    const lng = parseFloat(document.getElementById("zoneLng").value);
+    const suelos = Array.from(document.querySelectorAll('input[name="zoneSuelos"]:checked')).map(cb => cb.value);
+
+    if (!nombre || !municipio) { showToast("Nombre y municipio son obligatorios"); return; }
+    if (isNaN(lat) || isNaN(lng)) { showToast("Coordenadas inválidas"); return; }
+    if (suelos.length === 0) { showToast("Seleccione al menos un tipo de suelo"); return; }
+
+    const id = editId || `custom_${nextZoneId++}`;
+    const zonaData = {
+        id, nombre, municipio,
+        altitud: `${altitud} msnm`,
+        clima: { temp: "—", humedad: "—", viento: "—", uv: "—" },
+        suelos, descripcion,
+        weatherLocation: weatherLocation || `${municipio}, Chihuahua`,
+        lat, lng, custom: true
+    };
+
+    if (editId) {
+        const idx = ZONAS.findIndex(z => z.id === editId);
+        if (idx !== -1) {
+            zonaData.clima = ZONAS[idx].clima || zonaData.clima;
+            ZONAS[idx] = zonaData;
+        }
+        const cidx = customZonas.findIndex(z => z.id === editId);
+        if (cidx !== -1) customZonas[cidx] = zonaData;
+    } else {
+        ZONAS.push(zonaData);
+        customZonas.push(zonaData);
+    }
+
+    saveCustomZonas();
+    loadZonas();
+    renderMap();
+    updateStats();
+    document.getElementById("zoneModal").classList.remove("show");
+    showToast(editId ? "Zona actualizada" : "Zona agregada");
+
+    if (!editId) fetchWeatherForZone(zonaData);
+}
+
+window.deleteZone = function(id) {
+    if (!isCustomZone(id)) { showToast("No se pueden eliminar zonas predeterminadas"); return; }
+    if (!confirm("¿Está seguro de eliminar esta zona?")) return;
+    ZONAS = ZONAS.filter(z => z.id !== id);
+    customZonas = customZonas.filter(z => z.id !== id);
+    saveCustomZonas();
+    loadZonas();
+    renderMap();
+    updateStats();
+    showToast("Zona eliminada");
+};
+
+window.editZone = function(id) {
+    openZoneModal(id);
+};
+
+async function fetchWeatherForZone(zona) {
+    try {
+        const res = await fetch(`https://wttr.in/${encodeURIComponent(zona.weatherLocation)}?format=j1`);
+        if (!res.ok) return;
+        const data = await res.json();
+        const current = data.current_condition && data.current_condition[0];
+        if (!current) return;
+        zona.clima.temp = `${current.temp_C}°C`;
+        zona.clima.humedad = `${current.humidity}%`;
+        zona.clima.viento = `${current.windspeedKmph} km/h`;
+        zona.clima.uv = current.uvIndex || "—";
+        zona.clima.weatherDesc = (current.weatherDesc && current.weatherDesc[0] && current.weatherDesc[0].value) || "";
+        zona.clima.feelsLike = `${current.FeelsLikeC}°C`;
+        zona.clima.lastUpdate = current.localObsDateTime || current.observation_time || "";
+        renderZoneCards();
+        renderMap();
+    } catch (e) {}
+}
 
 /* ===== WEATHER API ===== */
 async function fetchWeather() {
@@ -416,6 +620,7 @@ function renderDetectionsWeather() {
 function init() {
     loadUsers();
     loadUsersFromStorage();
+    loadCustomZonas();
     loadZonas();
     loadEnfermedadesSelect();
     setupNavigation();
@@ -423,6 +628,7 @@ function init() {
     setupFilters();
     setupEditModal();
     setupUserModal();
+    setupZoneModal();
     loadDetections();
     updateStats();
     renderMap();
@@ -827,11 +1033,15 @@ function renderMap() {
 }
 
 function getLat(id) {
-    const c = { parral:26.93, santacruz:28.19, aldama:28.83, saucillo:28.03, valle_allende:26.93, jimenez:27.13, camargo:27.68, santa_isabel:28.38, cuauhtemoc:28.40, delicias:28.18, namiquipa:29.25 };
+    const c = { parral:26.93, santacruz:28.19, aldama:28.83, saucillo:28.03, valle_allende:26.93, jimenez:27.13, camargo:27.68, santa_isabel:28.3422, cuauhtemoc:28.40, delicias:28.18, namiquipa:29.25 };
+    const zona = ZONAS.find(z => z.id === id);
+    if (zona && zona.lat) return zona.lat;
     return c[id] || 28.0;
 }
 function getLng(id) {
-    const c = { parral:-105.82, santacruz:-106.04, aldama:-105.91, saucillo:-105.33, valle_allende:-105.42, jimenez:-104.93, camargo:-105.17, santa_isabel:-106.06, cuauhtemoc:-106.85, delicias:-105.47, namiquipa:-106.46 };
+    const c = { parral:-105.82, santacruz:-106.04, aldama:-105.91, saucillo:-105.33, valle_allende:-105.42, jimenez:-104.93, camargo:-105.17, santa_isabel:-106.3683, cuauhtemoc:-106.85, delicias:-105.47, namiquipa:-106.46 };
+    const zona = ZONAS.find(z => z.id === id);
+    if (zona && zona.lng) return zona.lng;
     return c[id] || -106.0;
 }
 
@@ -850,15 +1060,25 @@ window.showZoneDetail = function(zoneId) {
 function renderZoneCards() {
     const grid = document.getElementById("zonesGrid");
     grid.innerHTML = ZONAS.map(z => {
-        const soils = z.suelos.map(s => SUELOS_DATA[s]);
+        const soils = z.suelos.map(s => SUELOS_DATA[s]).filter(Boolean);
         const weatherBadge = z.clima.lastUpdate
             ? `<span class="weather-live-badge">🔴 EN VIVO</span>`
             : (weatherLoaded ? `<span class="weather-static-badge">⏳ Sin datos</span>` : `<span class="weather-loading-badge">⏳ Cargando...</span>`);
+        const custom = isCustomZone(z.id);
         return `
-        <div class="zone-card" id="zone-${z.id}">
+        <div class="zone-card ${custom ? 'zone-card-custom' : ''}" id="zone-${z.id}">
             <div class="zone-card-header">
-                <h3>${z.nombre}</h3>
-                <p>${z.municipio} — Altitud: ${z.altitud}</p>
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                    <div>
+                        <h3>${z.nombre} ${custom ? '<span style="font-size:9px;background:#27ae60;color:#fff;padding:1px 5px;border-radius:3px;vertical-align:middle">Personalizada</span>' : ''}</h3>
+                        <p>${z.municipio} — Altitud: ${z.altitud}</p>
+                    </div>
+                    ${custom ? `
+                    <div style="display:flex;gap:4px;flex-shrink:0">
+                        <button class="btn btn-sm btn-secondary" onclick="editZone('${z.id}')" title="Editar zona"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteZone('${z.id}')" title="Eliminar zona"><i class="fas fa-trash"></i></button>
+                    </div>` : ''}
+                </div>
             </div>
             <div class="zone-card-body">
                 <p style="font-size:13px;color:#555;margin-bottom:12px">${z.descripcion}</p>

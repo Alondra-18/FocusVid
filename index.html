@@ -91,7 +91,10 @@
 
     <!-- ============ ZONAS ============ -->
     <section id="zonas" class="section">
-        <div class="section-header"><h1>Zonas Vitivinícolas de Chihuahua</h1></div>
+        <div class="section-header">
+            <h1>Zonas Vitivinícolas de Chihuahua</h1>
+            <button class="btn btn-primary" id="btnAddZone"><i class="fas fa-plus"></i> Agregar Zona</button>
+        </div>
         <div class="zones-grid" id="zonesGrid"></div>
     </section>
 
@@ -222,6 +225,81 @@
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" id="cancelUserEdit">Cancelar</button>
                     <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Zone Modal -->
+<div class="modal" id="zoneModal">
+    <div class="modal-content" style="max-width:700px">
+        <div class="modal-header">
+            <h2 id="zoneModalTitle">Agregar Zona</h2>
+            <button class="modal-close" id="closeZoneModal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="zoneForm">
+                <input type="hidden" id="zoneEditId">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="zoneNombre">Nombre de la Zona *</label>
+                        <input type="text" id="zoneNombre" class="form-control" placeholder="Ej: Valle de la Guadalupe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zoneMunicipio">Municipio *</label>
+                        <input type="text" id="zoneMunicipio" class="form-control" placeholder="Ej: Ensenada" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="zoneAltitud">Altitud (msnm)</label>
+                        <input type="number" id="zoneAltitud" class="form-control" placeholder="Ej: 1500">
+                    </div>
+                    <div class="form-group">
+                        <label for="zoneWeatherLocation">Ubicación para clima (API)</label>
+                        <input type="text" id="zoneWeatherLocation" class="form-control" placeholder="Ej: Cuauhtémoc, Chihuahua">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="zoneDescripcion">Descripción</label>
+                    <textarea id="zoneDescripcion" class="form-control" rows="2" placeholder="Breve descripción de la zona vitivinícola..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tipos de Suelo *</label>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+                        <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer">
+                            <input type="checkbox" name="zoneSuelos" value="arcilloso"> Arcilloso
+                        </label>
+                        <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer">
+                            <input type="checkbox" name="zoneSuelos" value="arenoso"> Arenoso
+                        </label>
+                        <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer">
+                            <input type="checkbox" name="zoneSuelos" value="franco"> Franco
+                        </label>
+                        <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer">
+                            <input type="checkbox" name="zoneSuelos" value="calizo"> Calizo
+                        </label>
+                        <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer">
+                            <input type="checkbox" name="zoneSuelos" value="negro"> Negro
+                        </label>
+                    </div>
+                </div>
+                <div class="form-grid" style="grid-template-columns:1fr 1fr">
+                    <div class="form-group">
+                        <label for="zoneLat">Latitud</label>
+                        <input type="number" step="0.0001" id="zoneLat" class="form-control" placeholder="28.3422" readonly style="background:#f5f5f5">
+                    </div>
+                    <div class="form-group">
+                        <label for="zoneLng">Longitud</label>
+                        <input type="number" step="0.0001" id="zoneLng" class="form-control" placeholder="-106.3683" readonly style="background:#f5f5f5">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Ubicación en el mapa <span style="font-size:10px;color:#999">(clic en el mapa o arrastra el marcador para fijar la ubicación exacta)</span></label>
+                    <div id="zoneModalMap" style="width:100%;height:250px;border-radius:8px;border:1px solid #e0e0e0;margin-top:4px"></div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelZoneEdit">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Zona</button>
                 </div>
             </form>
         </div>

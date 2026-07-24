@@ -224,6 +224,10 @@ a{text-decoration:none;color:inherit}
 ::-webkit-scrollbar-thumb:hover{background:#999}
 
 /* RESPONSIVE */
+/* ZONE CUSTOM CARD */
+.zone-card-custom{border:2px solid #27ae60 !important}
+.zone-card-custom .zone-card-header{background:linear-gradient(135deg,#f0faf4,#e8f8f0)}
+
 /* WEATHER BADGES */
 .weather-live-badge{display:inline-block;background:#e74c3c;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;animation:pulse-live 2s infinite;margin-right:4px;vertical-align:middle}
 .weather-static-badge{display:inline-block;background:#95a5a6;color:#fff;font-size:9px;font-weight:600;padding:2px 6px;border-radius:4px;margin-right:4px;vertical-align:middle}
