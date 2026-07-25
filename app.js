@@ -368,6 +368,10 @@ let currentPhotos = [];
 let nextId = 1;
 let nextUserId = 5;
 let weatherLoaded = false;
+let weatherInterval = null;
+let weatherCountdown = 300;
+let weatherCountdownInterval = null;
+const WEATHER_REFRESH_SECONDS = 300;
 let customZonas = [];
 let nextZoneId = 100;
 let zoneModalMap = null;
@@ -554,20 +558,51 @@ window.editZone = function(id) {
     openZoneModal(id);
 };
 
+const WMO_CODES = {
+    0:"Despejado",1:"Principalmente despejado",2:"Parcialmente nublado",3:"Nublado",
+    45:"Niebla",48:"Niebla con escarcha",51:"Llovizna ligera",53:"Llovizna moderada",
+    55:"Llovizna densa",56:"Llovizna helada ligera",57:"Llovizna helada densa",
+    61:"Lluvia ligera",63:"Lluvia moderada",65:"Lluvia fuerte",
+    66:"Lluvia helada ligera",67:"Lluvia helada fuerte",
+    71:"Nevada ligera",73:"Nevada moderada",75:"Nevada fuerte",
+    77:"Granizo ligero",80:"Chubascos ligeros",81:"Chubascos moderados",
+    82:"Chubascos fuertes",85:"Chubascos de nieve ligeros",86:"Chubascos de nieve fuertes",
+    95:"Tormenta",96:"Tormenta con granizo ligero",99:"Tormenta con granizo fuerte"
+};
+
+function getLat(id) {
+    const c = { parral:26.93, santacruz:28.19, aldama:28.83, saucillo:28.03, valle_allende:26.93, jimenez:27.13, camargo:27.68, santa_isabel:28.3422, cuauhtemoc:28.40, delicias:28.18, namiquipa:29.25 };
+    const zona = ZONAS.find(z => z.id === id);
+    if (zona && zona.lat) return zona.lat;
+    return c[id] || 28.0;
+}
+function getLng(id) {
+    const c = { parral:-105.82, santacruz:-106.04, aldama:-105.91, saucillo:-105.33, valle_allende:-105.42, jimenez:-104.93, camargo:-105.17, santa_isabel:-106.3683, cuauhtemoc:-106.85, delicias:-105.47, namiquipa:-106.46 };
+    const zona = ZONAS.find(z => z.id === id);
+    if (zona && zona.lng) return zona.lng;
+    return c[id] || -106.0;
+}
+
+function applyWeatherToZone(zona, data) {
+    const c = data.current;
+    if (!c) return;
+    zona.clima.temp = `${Math.round(c.temperature_2m)}°C`;
+    zona.clima.humedad = `${c.relative_humidity_2m}%`;
+    zona.clima.viento = `${Math.round(c.wind_speed_10m)} km/h`;
+    zona.clima.uv = c.uv_index != null ? String(Math.round(c.uv_index)) : "—";
+    zona.clima.weatherDesc = WMO_CODES[c.weather_code] || "—";
+    zona.clima.feelsLike = `${Math.round(c.apparent_temperature)}°C`;
+    zona.clima.lastUpdate = new Date().toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit" });
+}
+
 async function fetchWeatherForZone(zona) {
     try {
-        const res = await fetch(`https://wttr.in/${encodeURIComponent(zona.weatherLocation)}?format=j1`);
+        const lat = getLat(zona.id);
+        const lng = getLng(zona.id);
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,uv_index,weather_code,apparent_temperature&timezone=America/Chihuahua`);
         if (!res.ok) return;
         const data = await res.json();
-        const current = data.current_condition && data.current_condition[0];
-        if (!current) return;
-        zona.clima.temp = `${current.temp_C}°C`;
-        zona.clima.humedad = `${current.humidity}%`;
-        zona.clima.viento = `${current.windspeedKmph} km/h`;
-        zona.clima.uv = current.uvIndex || "—";
-        zona.clima.weatherDesc = (current.weatherDesc && current.weatherDesc[0] && current.weatherDesc[0].value) || "";
-        zona.clima.feelsLike = `${current.FeelsLikeC}°C`;
-        zona.clima.lastUpdate = current.localObsDateTime || current.observation_time || "";
+        applyWeatherToZone(zona, data);
         renderZoneCards();
         renderMap();
     } catch (e) {}
@@ -580,19 +615,12 @@ async function fetchWeather() {
 
     const fetches = ZONAS.map(async (zona) => {
         try {
-            const res = await fetch(`https://wttr.in/${encodeURIComponent(zona.weatherLocation)}?format=j1`);
+            const lat = getLat(zona.id);
+            const lng = getLng(zona.id);
+            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,relative_humidity_2m,wind_speed_10m,uv_index,weather_code,apparent_temperature&timezone=America/Chihuahua`);
             if (!res.ok) return;
             const data = await res.json();
-            const current = data.current_condition && data.current_condition[0];
-            if (!current) return;
-
-            zona.clima.temp = `${current.temp_C}°C`;
-            zona.clima.humedad = `${current.humidity}%`;
-            zona.clima.viento = `${current.windspeedKmph} km/h`;
-            zona.clima.uv = current.uvIndex || "—";
-            zona.clima.weatherDesc = (current.weatherDesc && current.weatherDesc[0] && current.weatherDesc[0].value) || "";
-            zona.clima.feelsLike = `${current.FeelsLikeC}°C`;
-            zona.clima.lastUpdate = current.localObsDateTime || current.observation_time || "";
+            applyWeatherToZone(zona, data);
         } catch (e) {
             console.warn(`Weather fetch failed for ${zona.municipio}:`, e);
         }
@@ -605,7 +633,47 @@ async function fetchWeather() {
     renderZoneCards();
     renderMap();
     renderDetectionsWeather();
+    updateWeatherTimestamp();
+    startWeatherCountdown();
 }
+
+function updateWeatherTimestamp() {
+    const el = document.getElementById("weatherTimestamp");
+    if (el) {
+        const now = new Date().toLocaleTimeString("es-MX", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+        el.textContent = `Última actualización: ${now}`;
+    }
+}
+
+function startWeatherCountdown() {
+    weatherCountdown = WEATHER_REFRESH_SECONDS;
+    if (weatherCountdownInterval) clearInterval(weatherCountdownInterval);
+    weatherCountdownInterval = setInterval(() => {
+        weatherCountdown--;
+        const el = document.getElementById("weatherCountdown");
+        if (el) {
+            const min = Math.floor(weatherCountdown / 60);
+            const sec = weatherCountdown % 60;
+            el.textContent = `${min}:${String(sec).padStart(2, "0")}`;
+        }
+        if (weatherCountdown <= 0) {
+            clearInterval(weatherCountdownInterval);
+            refreshWeather();
+        }
+    }, 1000);
+}
+
+function startWeatherAutoRefresh() {
+    if (weatherInterval) clearInterval(weatherInterval);
+    weatherInterval = setInterval(() => refreshWeather(), WEATHER_REFRESH_SECONDS * 1000);
+}
+
+window.refreshWeather = async function() {
+    const btn = document.getElementById("btnRefreshWeather");
+    if (btn) { btn.classList.add("spinning"); btn.disabled = true; }
+    await fetchWeather();
+    if (btn) { btn.classList.remove("spinning"); btn.disabled = false; }
+};
 
 function renderDetectionsWeather() {
     document.querySelectorAll(".detection-weather-live, .analysis-weather-live").forEach(el => {
@@ -636,6 +704,7 @@ function init() {
     renderAllDetections();
     renderUsers();
     fetchWeather();
+    startWeatherAutoRefresh();
 }
 
 /* ===== USERS ===== */
@@ -910,7 +979,7 @@ function analyzePhoto() {
                 <p>🌡 ${zona.clima.temp} ${zona.clima.feelsLike ? `(Sensación: ${zona.clima.feelsLike})` : ''} | 💧 ${zona.clima.humedad} | 💨 ${zona.clima.viento} | ☀️ UV ${zona.clima.uv}</p>
                 ${zona.clima.weatherDesc ? `<p style="font-size:11px;color:#555;margin-top:2px">Condición: ${zona.clima.weatherDesc}</p>` : ''}
                 ${zona.clima.lastUpdate ? `<p style="font-size:10px;color:#999;margin-top:2px">Última observación: ${zona.clima.lastUpdate}</p>` : ''}
-                <p style="font-size:10px;color:#999;margin-top:2px">Fuente: <a href="https://wttr.in" target="_blank" rel="noopener">wttr.in</a> (The Weather Channel data)</p>
+                <p style="font-size:10px;color:#999;margin-top:2px">Fuente: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> (The Weather Channel / NOAA)</p>
             </div>
             <div class="analysis-item"><h4>Tipo de Suelo</h4>
                 <p>${suelo.nombre} — pH: ${suelo.ph}</p>
@@ -1022,7 +1091,7 @@ function renderMap() {
                 <strong style="font-size:13px;color:#1a3a5c">${z.nombre}</strong><br>
                 <span style="font-size:11px;color:#555">${z.municipio} — ${z.altitud}</span><br>
                 ${weatherLine}
-                <span style="font-size:10px;color:#999">Fuente: wttr.in</span><br>
+                <span style="font-size:10px;color:#999">Fuente: Open-Meteo</span><br>
                 <a href="#" onclick="event.preventDefault();showZoneDetail('${z.id}')" style="font-size:11px;color:#1a3a5c;font-weight:600">Ver detalles →</a>
             </div>
         `);
@@ -1030,19 +1099,6 @@ function renderMap() {
     });
 
     setTimeout(() => map.invalidateSize(), 100);
-}
-
-function getLat(id) {
-    const c = { parral:26.93, santacruz:28.19, aldama:28.83, saucillo:28.03, valle_allende:26.93, jimenez:27.13, camargo:27.68, santa_isabel:28.3422, cuauhtemoc:28.40, delicias:28.18, namiquipa:29.25 };
-    const zona = ZONAS.find(z => z.id === id);
-    if (zona && zona.lat) return zona.lat;
-    return c[id] || 28.0;
-}
-function getLng(id) {
-    const c = { parral:-105.82, santacruz:-106.04, aldama:-105.91, saucillo:-105.33, valle_allende:-105.42, jimenez:-104.93, camargo:-105.17, santa_isabel:-106.3683, cuauhtemoc:-106.85, delicias:-105.47, namiquipa:-106.46 };
-    const zona = ZONAS.find(z => z.id === id);
-    if (zona && zona.lng) return zona.lng;
-    return c[id] || -106.0;
 }
 
 window.showZoneDetail = function(zoneId) {

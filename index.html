@@ -62,6 +62,14 @@
     <!-- ============ DASHBOARD ============ -->
     <section id="dashboard" class="section active">
         <div class="section-header"><h1>Dashboard - Viñedos en Chihuahua</h1></div>
+        <div class="weather-refresh-bar">
+            <div class="refresh-info">
+                <i class="fas fa-cloud-sun-rain"></i>
+                <span>Clima en tiempo real — <span class="refresh-countdown" id="weatherCountdown">5:00</span></span>
+                <span class="weather-last-update" id="weatherTimestamp"></span>
+            </div>
+            <button class="btn-refresh" id="btnRefreshWeather" onclick="refreshWeather()"><i class="fas fa-sync-alt"></i> Actualizar ahora</button>
+        </div>
         <div class="stats-grid">
             <div class="stat-card blue"><i class="fas fa-map-marker-alt"></i><h3 id="statZonas">0</h3><p>Zonas Activas</p></div>
             <div class="stat-card red"><i class="fas fa-exclamation-triangle"></i><h3 id="statEnfermedades">0</h3><p>Enfermedades Detectadas</p></div>
@@ -348,7 +356,7 @@
 </div>
 
 <footer style="max-width:1400px;margin:0 auto;padding:14px 16px;text-align:center;border-top:1px solid #e0e0e0;font-size:9px;color:#999;margin-top:20px">
-    <p><strong>Datos meteorológicos:</strong> <a href="https://wttr.in" target="_blank" rel="noopener" style="color:#1a3a5c">wttr.in</a> (basado en The Weather Channel) — Actualización en tiempo real</p>
+    <p><strong>Datos meteorológicos:</strong> <a href="https://open-meteo.com/" target="_blank" rel="noopener" style="color:#1a3a5c">Open-Meteo</a> (estaciones meteorológicas en tiempo real, actualización cada 5 min) — Fuente: The Weather Channel / NOAA / DWD</p>
     <p><strong>Productos agrícolas:</strong> <a href="https://www.ftepeyac.com.mx/" target="_blank" rel="noopener" style="color:#1a3a5c">Fertilizantes Tepeyac</a> (+6,000 productos, 160+ ubicaciones) |
        <a href="https://www.unifrut.com.mx/" target="_blank" rel="noopener" style="color:#1a3a5c">Unifrut</a> (Control biológico, Fitopatología) |
        <a href="https://agrochimayo.com/" target="_blank" rel="noopener" style="color:#1a3a5c">AgroChimayo</a> (Asesoría agrícola, 614-112-2882)</p>

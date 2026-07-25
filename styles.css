@@ -226,7 +226,21 @@ a{text-decoration:none;color:inherit}
 /* RESPONSIVE */
 /* ZONE CUSTOM CARD */
 .zone-card-custom{border:2px solid #27ae60 !important}
-.zone-card-custom .zone-card-header{background:linear-gradient(135deg,#f0faf4,#e8f8f0)}
+.zone-card-custom .zone-card-header{background:var(--primary);color:#fff}
+.zone-card-custom .zone-card-header h3{color:#fff}
+.zone-card-custom .zone-card-header p{color:#d4e6f1}
+.zone-card-custom .zone-card-header a{color:#d4e6f1}
+
+/* WEATHER REFRESH */
+.weather-refresh-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 14px;background:linear-gradient(135deg,#1a3a5c,#0d2137);color:#fff;border-radius:8px;margin-bottom:12px;font-size:11px;flex-wrap:wrap}
+.weather-refresh-bar .refresh-info{display:flex;align-items:center;gap:6px}
+.weather-refresh-bar .refresh-countdown{color:#d4e6f1;font-weight:600}
+.weather-refresh-bar .btn-refresh{background:#27ae60;color:#fff;border:none;padding:4px 10px;border-radius:5px;font-size:10px;cursor:pointer;display:flex;align-items:center;gap:4px;transition:background .2s}
+.weather-refresh-bar .btn-refresh:hover{background:#219a52}
+.weather-refresh-bar .btn-refresh:disabled{opacity:.5;cursor:not-allowed}
+.weather-refresh-bar .btn-refresh i{animation:none}
+.weather-refresh-bar .btn-refresh.spinning i{animation:spin 1s linear infinite}
+.weather-last-update{font-size:9px;color:#d4e6f1;opacity:.7}
 
 /* WEATHER BADGES */
 .weather-live-badge{display:inline-block;background:#e74c3c;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;animation:pulse-live 2s infinite;margin-right:4px;vertical-align:middle}
@@ -271,4 +285,5 @@ a{text-decoration:none;color:inherit}
     .main-content{padding:10px}
     .section-header h1{font-size:14px}
     .photo-preview-grid{grid-template-columns:repeat(2,1fr)}
+    .weather-refresh-bar{flex-direction:column;text-align:center}
 }
