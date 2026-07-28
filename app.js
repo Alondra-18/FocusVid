@@ -352,6 +352,19 @@ const ENFERMEDADES = [
             { nombre: "Coragen SC", tipo: "Insecticida sistémico (clorantraniliprol)", dosis: "0.15 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
             { nombre: "Spinosad 480 SC", tipo: "Bioinsecticida (spinosad)", dosis: "0.5-1 mL/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" }
         ]
+    },
+    {
+        id: "gusano_descarnador", nombre: "Gusano Descarnador de la Hoja", tipo: "plaga", tipoLabel: "Plaga / Oruga",
+        icono: "🐛",
+        descripcion: "Plaga causada por larvas de lepidópteros (Spodoptera spp., Harrisina americana) que se alimentan del parénquima foliar, dejando solo las nervaduras (esqueletización). Afecta la capacidad fotosintética de la vid.",
+        sintomas: ["Hojas con apariencia de esqueleto (nervaduras visibles)", "Defoliación progresiva desde el envés", "Larvas visibles en el envés de las hojas", "Reducción de la fotosíntesis y vigor de la planta"],
+        condiciones: "Temperatura 25-35°C, clima seco, primavera-verano, maleza abundante en el viñedo",
+        productos: [
+            { nombre: "Crymax GDA", tipo: "Bioinsecticida (Bacillus thuringiensis kurstaki)", dosis: "1-2 g/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Coragen SC", tipo: "Insecticida sistémico (clorantraniliprol)", dosis: "0.15-0.25 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Belt SC", tipo: "Insecticida (flubendiamide)", dosis: "0.25 mL/L", organico: false, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" },
+            { nombre: "Spinosad 480 SC", tipo: "Bioinsecticida (spinosad)", dosis: "0.5-1 mL/L", organico: true, proveedor: "Fertilizantes Tepeyac", proveedorUrl: "https://www.ftepeyac.com.mx/insecticidas" }
+        ]
     }
 ];
 
